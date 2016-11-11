@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.31)  6 NOV 2016 22:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.31)  11 NOV 2016 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -229,6 +229,12 @@ LaTeX Warning: Label `' multiply defined.
 
 LaTeX Warning: Label `' multiply defined.
 
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `fig:SSDArchitecture' multiply defined.
+
 )
 \openout1 = `sig-alternate-sample.aux'.
 
@@ -370,81 +376,116 @@ Overfull \hbox (13.86555pt too wide) in paragraph at lines 237--238
 LA
  []
 
-[2]
+[2] <NetworkModel.pdf, id=45, 436.63126pt x 339.51843pt>
+File: NetworkModel.pdf Graphic file (type pdf)
 
-LaTeX Warning: File `Network model.pdf' not found on input line 261.
+<use NetworkModel.pdf>
+Package pdftex.def Info: NetworkModel.pdf used on input line 261.
+(pdftex.def)             Requested size: 170.7119pt x 113.80801pt.
+ <DataFlow.pdf, id=46, 505.13719pt x 243.15843pt>
+File: DataFlow.pdf Graphic file (type pdf)
 
-<Network model.pdf, id=45, 844.65562pt x 596.98032pt>
-File: Network model.pdf Graphic file (type pdf)
- <use Network model.pdf>
-Package pdftex.def Info: Network model.pdf used on input line 261.
-(pdftex.def)             Requested size: 284.53699pt x 227.62004pt.
+<use DataFlow.pdf>
+Package pdftex.def Info: DataFlow.pdf used on input line 295.
+(pdftex.def)             Requested size: 227.62566pt x 113.80956pt.
+ [3 <./NetworkModel.pdf> <./DataFlow.pdf
 
-Overfull \hbox (44.53699pt too wide) in paragraph at lines 261--261
- [] 
- []
+pdfTeX warning: pdflatex (file ./DataFlow.pdf): PDF inclusion: multiple pdfs wi
+th page group included in a single page
+>] <HashChain.pdf, id=132, 686.565pt x 149.05687pt>
+File: HashChain.pdf Graphic file (type pdf)
+ <use HashChain.pdf>
+Package pdftex.def Info: HashChain.pdf used on input line 318.
+(pdftex.def)             Requested size: 284.52107pt x 56.90602pt.
 
-<structure.pdf, id=46, 574.39594pt x 298.86656pt>
-File: structure.pdf Graphic file (type pdf)
- <use structure.pdf>
-Package pdftex.def Info: structure.pdf used on input line 268.
-(pdftex.def)             Requested size: 284.53282pt x 227.62433pt.
-
-Overfull \hbox (44.53282pt too wide) in paragraph at lines 268--268
+Overfull \hbox (44.52107pt too wide) in paragraph at lines 318--318
  [][] 
  []
 
-[3 <./Network model.pdf> <./structure.pdf
 
-pdfTeX warning: pdflatex (file ./structure.pdf): PDF inclusion: multiple pdfs w
-ith page group included in a single page
->] [4]
+Underfull \vbox (badness 1558) has occurred while \output is active []
 
-LaTeX Warning: File `specific puzzle.pdf' not found on input line 351.
+ [4 <./HashChain.pdf>] <SpecificPuzzle.pdf, id=151, 876.27374pt x 258.9675pt>
+File: SpecificPuzzle.pdf Graphic file (type pdf)
 
-<specific puzzle.pdf, id=73, 876.27374pt x 258.9675pt>
-File: specific puzzle.pdf Graphic file (type pdf)
+<use SpecificPuzzle.pdf>
+Package pdftex.def Info: SpecificPuzzle.pdf used on input line 363.
+(pdftex.def)             Requested size: 227.61186pt x 56.90584pt.
 
-<use specific puzzle.pdf>
-Package pdftex.def Info: specific puzzle.pdf used on input line 351.
-(pdftex.def)             Requested size: 284.53154pt x 227.63127pt.
-
-Overfull \hbox (44.53154pt too wide) in paragraph at lines 351--351
- [] 
+Overfull \hbox (18.65689pt too wide) in paragraph at lines 384--384
+[]\secfnt IMPLEMENTATION AND PER-FOR-MANCE
  []
 
+Package epstopdf Info: Source file: <compare_color.eps>
+(epstopdf)                    date: 2016-11-07 22:11:09
+(epstopdf)                    size: 19218 bytes
+(epstopdf)             Output file: <compare_color-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-11-07 22:27:19
+(epstopdf)                    size: 5836 bytes
+(epstopdf)             Command: <repstopdf --outfile=compare_color-eps-converte
+d-to.pdf compare_color.eps>
+(epstopdf)             \includegraphics on input line 393.
+Package epstopdf Info: Output file is already uptodate.
+<compare_color-eps-converted-to.pdf, id=152, 361.35pt x 252.945pt>
+File: compare_color-eps-converted-to.pdf Graphic file (type pdf)
+
+<use compare_color-eps-converted-to.pdf>
+Package pdftex.def Info: compare_color-eps-converted-to.pdf used on input line 
+393.
+(pdftex.def)             Requested size: 227.62413pt x 142.26576pt.
+Package epstopdf Info: Source file: <2.eps>
+(epstopdf)                    date: 2016-11-08 20:15:42
+(epstopdf)                    size: 19317 bytes
+(epstopdf)             Output file: <2-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-11-08 20:24:17
+(epstopdf)                    size: 6875 bytes
+(epstopdf)             Command: <repstopdf --outfile=2-eps-converted-to.pdf 2.e
+ps>
+(epstopdf)             \includegraphics on input line 401.
+Package epstopdf Info: Output file is already uptodate.
+
+<2-eps-converted-to.pdf, id=153, 361.35pt x 252.945pt>
+File: 2-eps-converted-to.pdf Graphic file (type pdf)
+
+<use 2-eps-converted-to.pdf>
+Package pdftex.def Info: 2-eps-converted-to.pdf used on input line 401.
+(pdftex.def)             Requested size: 227.62413pt x 142.26576pt.
+
 No file sig-alternate-sample.bbl.
-[5 <./specific puzzle.pdf>] (./sig-alternate-sample.aux)
+[5 <./SpecificPuzzle.pdf> <./compare_color-eps-converted-to.pdf> <./2-eps-conve
+rted-to.pdf>] [6
+
+] (./sig-alternate-sample.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3215 strings out of 493304
- 41261 string characters out of 6139871
- 115632 words of memory out of 5000000
- 6571 multiletter control sequences out of 15000+600000
+ 3243 strings out of 493304
+ 41755 string characters out of 6139871
+ 115671 words of memory out of 5000000
+ 6595 multiletter control sequences out of 15000+600000
  54972 words of font info for 77 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 41i,10n,35p,1920b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,10n,35p,1918b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri
-8a.pfb>
-Output written on sig-alternate-sample.pdf (5 pages, 498255 bytes).
+pe1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
+s/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on sig-alternate-sample.pdf (6 pages, 851315 bytes).
 PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
+ 234 PDF objects out of 1000 (max. 8388607)
+ 174 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
