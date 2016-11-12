@@ -1,0 +1,45 @@
+#ifndef DRIP_MSG_H
+#define DRIP_MSG_H
+
+enum {
+	AM_SERIAL_MSG = 6,
+	DRIP_VERSION_UKNOWN = 0,
+	DISSEMINATOR_NUM = 4,
+	MAX_DATA_LEN = 10,
+	DATA_NUM = 4,
+};
+
+enum {
+	ID_DATA1 = 0x1,
+	ID_DATA2 = 0x2,
+	ID_DATA3 = 0x3,
+	ID_DATA4 = 0x4,
+};
+
+typedef struct drip_msg
+{
+	uint8_t type;
+	uint8_t content[0];
+} drip_msg_t;
+
+typedef struct drip_data2
+{
+	uint8_t data[2];
+} drip_data2_t;
+
+typedef struct drip_data4
+{
+	uint8_t data[4];
+} drip_data4_t;
+
+typedef struct drip_data6
+{
+	uint8_t data[6];
+} drip_data6_t;
+
+typedef struct drip_data8
+{
+	uint8_t data[8];
+} drip_data8_t;
+
+#endif

@@ -1,0 +1,11 @@
+Bus Dev USB Path                 Reference  Device           Description
+--- --- ------------------------ ---------- ---------------- -------------------------------------
+  2   4 usb-0000:02:00.0-2.1     MSYKN5OB   /dev/ttyUSB0     Memsic Memsic Telos Rev.B
+  2   6 usb-0000:02:00.0-2.2     MSYKN4AV   /dev/ttyUSB1     Memsic Memsic Telos Rev.B
+  2   7 usb-0000:02:00.0-2.3     MSYKMZGW   /dev/ttyUSB2     Memsic Memsic Telos Rev.B
+  2  15 usb-0000:02:00.0-2.7.2   XBS0SIJP   /dev/ttyUSB3     XBOW Crossbow Telos Rev.B
+  2  20 usb-0000:02:00.0-2.7.3   MSYKNDNF   /dev/ttyUSB4     Memsic Memsic Telos Rev.B
+  2  21 usb-0000:02:00.0-2.5     MSYKMZUJ   /dev/ttyUSB5     Memsic Memsic Telos Rev.B
+  2  22 usb-0000:02:00.0-2.7.1   MSYKN2NU   /dev/ttyUSB6     Memsic Memsic Telos Rev.B
+  2  23 usb-0000:02:00.0-2.6     MSYKN3BK   /dev/ttyUSB7     Memsic Memsic Telos Rev.B
+  2  24 usb-0000:02:00.0-2.4     MSYKN66Q   /dev/ttyUSB8     Memsic Memsic Telos Rev.B

@@ -1,0 +1,174 @@
+
+module testSecDisseminationC {
+	uses interface Boot;
+	uses interface SplitControl as RadioControl;
+	uses interface StdControl as DisseminationControl;
+
+	uses interface DisseminationValue<drip_data_t> as Data1Value;
+
+	uses interface DisseminationValue<drip_data_t> as Data2Value;
+
+	uses interface DisseminationValue<drip_data_t> as Data3Value;
+
+	uses interface DisseminationValue<drip_data_t> as Data4Value;
+
+	uses interface Leds;
+	//uses interface Timer<TMilli> as DisseminationTimer;
+
+	//uses interface SplitControl as SerialControl;
+	//uses interface AMSend as SerialSend;
+	//uses interface Packet as SerialPacket;
+	//uses interface Receive as SerialReceive;
+}
+
+implementation {
+	//message_t serial_packet;
+
+	uint8_t data1[MAX_DATA_LEN];
+	uint8_t data2[MAX_DATA_LEN];
+	uint8_t data3[MAX_DATA_LEN];
+	uint8_t data4[MAX_DATA_LEN];
+
+	uint8_t data1len = 0;
+	uint8_t data2len = 0;
+	uint8_t data3len = 0;
+	uint8_t data4len = 0;
+
+	//bool serialLocked = FALSE;
+
+	/*void sendRoot()
+	{
+		uint8_t i;
+		drip_msg_t *serialpkt;
+		if (serialLocked) {
+			return;
+		}
+		serialpkt = (drip_msg_t *)(call SerialPacket.getPayload(&serial_packet, 22));
+		if (serialpkt == NULL) {
+			return;
+		}
+		serialpkt->type = ID_DATA1;
+		for (i = 0; i < 21; i++) {
+			serialpkt->content[i] = i;
+		}
+		if (call SerialSend.send(AM_BROADCAST_ADDR, &serial_packet, 22) == SUCCESS) {
+			serialLocked = TRUE;
+		}
+	}*/
+
+	event void Boot.booted() {
+		memset(root, 0, HASH_LEN);
+		memset(data1, 0, MAX_DATA_LEN);
+		memset(data2, 0, MAX_DATA_LEN);
+		memset(data3, 0, MAX_DATA_LEN);
+		memset(data4, 0, MAX_DATA_LEN);
+
+		data1len = 0;
+		data2len = 0;
+		data3len = 0;
+		data4len = 0;
+
+		//call SerialControl.start();
+		call RadioControl.start();
+	}
+
+	event void RadioControl.startDone(error_t res) {
+		if (res == SUCCESS) {
+			call DisseminationControl.start();
+		} else {
+			call RadioControl.start();
+		}
+	}
+
+	/*event void SerialControl.startDone(error_t err) {
+		if (err == SUCCESS) {
+			call RadioControl.start();
+			//sendRoot();
+		} else {
+			
+		}
+	}
+	
+	event void DisseminationTimer.fired() {
+		rootversion++;
+		dataversion++;
+		call RootVersion.set(rootversion);
+	}
+	*/
+	event void RadioControl.stopDone(error_t err) { }
+
+	/*event void SerialControl.stopDone(error_t err) { }
+
+	event void SerialSend.sendDone (message_t *msg, error_t err) {
+		if (&serial_packet == msg) {
+			serialLocked = FALSE;
+		}
+	}
+
+	event message_t *SerialReceive.receive(message_t *msg, void *payload, uint8_t len) {
+		drip_msg_t *serialpkt = (drip_msg_t *)payload;
+		call Leds.led0Toggle();
+		switch (serialpkt -> type) {
+		case ID_ROOT:
+			if (len == 63) {
+				call Leds.led1Toggle();
+			}
+			memcpy(root, serialpkt->content, len - 1);
+			rootversion++;
+			call RootVersion.set(rootversion);
+			break;
+		case ID_DATA1:
+			if (len == 66) {
+				call Leds.led2Toggle();
+			}
+			memcpy(data1, serialpkt->content, len - 1);
+			data1version++;
+			call Data1Version.set(data1version);
+			break;
+		case ID_DATA2:
+			memcpy(data2, serialpkt->content, len - 1);
+			data2version++;
+			call Data2Version.set(data2version);
+			break;
+		case ID_DATA3:
+			memcpy(data3, serialpkt->content, len - 1);
+			data3version++;
+			call Data3Version.set(data3version);
+			break;
+		case ID_DATA4:
+			memcpy(data4, serialpkt->content, len - 1);
+			data4version++;
+			call Data4Version.set(data4version);
+			break;
+		}
+		
+		return msg;
+	}*/
+
+	event void Data1Value.changed() {
+		const drip_data_t* newdata = (drip_data_t *)(call Data1Value.get());
+
+		call Leds.led1Toggle();
+
+		memcpy(data1, newdata->data, newdata->size);
+	}
+
+	event void Data2Value.changed() {
+		const drip_data_t* newdata = (drip_data_t *)(call Data2Value.get());
+
+		memcpy(data2, newdata->data, newdata->size);
+	}
+
+	event void Data3Value.changed() {
+		const drip_data_t* newdata = (drip_data_t *)(call Data3Value.get());
+
+		memcpy(data3, newdata->data, newdata->size);
+	}
+
+	event void Data4Value.changed() {
+		const drip_data_t* newdata = (drip_data_t *)(call Data4Value.get());
+
+		memcpy(data4, newdata->data, newdata->size);
+	}
+
+}

@@ -1,0 +1,30 @@
+#ifndef DRIP_MSG_H
+#define DRIP_MSG_H
+
+enum {
+	AM_SERIAL_MSG = 6,
+	DRIP_VERSION_UKNOWN = 0,
+	MAX_DATA_LEN = 10,
+};
+
+enum {
+	ID_ROOT = 0x0,
+	ID_DATA1 = 0x1,
+	ID_DATA2 = 0x2,
+	ID_DATA3 = 0x1,
+	ID_DATA1 = 0x1,
+};
+
+typedef nx_struct drip_msg
+{
+	nx_uint8_t type;
+	nx_uint8_t content[0];
+} drip_msg_t;
+
+typedef nx_struct drip_data
+{
+	nx_uint8_t size;//data size
+	nx_uint8_t data[MAX_DATA_LEN];
+} drip_data_t;
+
+#endif

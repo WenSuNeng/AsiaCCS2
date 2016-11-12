@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#motelist | grep "/dev/ttyUSB[0-9]*"
+RESULT=result
+LISTEN_P=receiver
+DISSEMINATOR=disseminator
+MOTE0=/dev/ttyUSB0
+MOTE=/dev/ttyUSB
+BAUDRATE=115200
+
+if [ ! -d $RESULT ]
+then
+	mkdir result
+fi
+
+if [ ! -e $LISTEN_P ]
+then
+	echo "compile receiver"
+	gcc receiver.c drip_ack_msg.c -o receiver -I/opt/tinyos-2.x/support/sdk/c/sf -L /opt/tinyos-2.x/support/sdk/c/sf -lmote
+fi
+
+if [ ! -e $DISSEMINATOR ]
+then
+	echo "compile bastaion"
+	gcc BaseStation.c drip_ack_msg.c -o disseminator -I/opt/tinyos-2.x/support/sdk/c/sf -L /opt/tinyos-2.x/support/sdk/c/sf -lmote
+fi
+
+for ((idx = 1; idx < 10; idx++))
+do
+
+	for ((i = 1; i < 6; i++))
+	do
+		if [ -e $MOTE$i ]
+		then
+			./$LISTEN_P $MOTE$i $BAUDRATE > ./$RESULT/$i.tmp &
+		fi
+	done
+
+	./$DISSEMINATOR $MOTE0 micaz > ./result/0.tmp
+
+	while ps -a | grep -q "receiver"
+	do
+		#echo "receiver exists"
+		sleep 3s
+	done
+
+	cat ./$RESULT/*.tmp > ./$RESULT/$idx.log
+
+done
+
+rm -f ./$RESULT/*.tmp
+#cat ./result/*.log > result.txt
+

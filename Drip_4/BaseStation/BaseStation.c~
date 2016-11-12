@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <sys/time.h>
+#include <message.h>
+#include "serialsource.h"
+#include "serialpacket.h"
+#include "serialprotocol.h"
+
+#include "drip_msg.h"
+#include "drip_ack_msg.h"
+
+#define DATA_NUM 4
+#define PACKET_HEADER_LEN (1 + SPACKET_SIZE)
+#define MILLION 1000000
+
+uint8_t *newPacket(int mlen)
+{
+	return (uint8_t *)malloc(mlen + PACKET_HEADER_LEN);
+}
+
+void freePacket(uint8_t *packet)
+{
+	free(packet);
+}
+
+void *buildPacket(uint8_t *packet, int mlen)
+{
+	int i = 0;
+	packet[0] = SERIAL_TOS_SERIAL_ACTIVE_MESSAGE_ID;
+	tmsg_t *serial_packet = new_tmsg(packet + 1, mlen + 7);
+
+	spacket_header_dest_set(serial_packet, 0xFFFF);
+	spacket_header_src_set(serial_packet, 0x0);
+	spacket_header_length_set(serial_packet, (uint16_t)mlen);
+	spacket_header_group_set(serial_packet, 0x0);
+	spacket_header_type_set(serial_packet, AM_SERIAL_MSG);
+	/*for (i = 0; i < mlen; i++)
+	{
+		spacket_data_set(serial_packet, (size_t)i, ((uint8_t *)msg)[i]);
+	}*/
+	free_tmsg(serial_packet);
+	return (void *)packet;
+}
+
+uint8_t *getSerialPacketData(uint8_t *serial_packet)
+{
+	return (serial_packet + 1 + SPACKET_SIZE);
+}
+
+int sendPacket(serial_source dst, uint8_t *msg, int mlen)
+{
+	if (write_serial_packet(dst, (unsigned char *)msg, mlen + PACKET_HEADER_LEN) == 0)
+	{
+		//printf("write_serial_packet successfully!\n");
+		freePacket(msg);
+		return 1;
+	}
+	else
+	{
+		//printf("write_serial_packet failed!\n");
+		freePacket(msg);
+		return 0;
+	}
+}
+
+int sendDataMsg(serial_source dst, unsigned char *data, int dlen, int type)
+{
+	int datapayload = dlen + 1;
+	//printf("Data payload: %d\n", datapayload);
+	uint8_t *data_packet = newPacket(datapayload);
+	int i = 0, j = 0, k = 0;
+
+	drip_msg_t *data_drip = (drip_msg_t *)getSerialPacketData(data_packet);
+	data_drip->type = type;
+	unsigned char *dp = (unsigned char *)(data_drip->content);
+	
+	for (i = 0; i < dlen; i++)
+	{
+		dp[i] = data[i];
+	}
+	buildPacket(data_packet, datapayload);
+	return sendPacket(dst, data_packet, datapayload);
+}
+
+int getNodeIdx(uint16_t nid, uint16_t *node, int num, int *updated)
+{
+	int i = 0;
+	for (; i < num; i++)
+	{
+		if (node[i] == nid) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+
+int main(int argc, char **argv)
+{
+	serial_source port;
+	if (argc < 3)
+	{
+		printf("Usage: %s <device> <rate> <bytes> - send a raw packet to a serial port\n", argv[0]);
+		exit(2);
+	}
+	port = open_serial_source(argv[1], platform_baud_rate(argv[2]), 0, NULL);
+
+	if (port == NULL)
+	{
+		printf("Couldn't open serial port at %s:%s\n", argv[1], argv[2]);
+		exit(1);
+	}
+	
+	int i = 0;
+	unsigned char data[2*DATA_NUM];
+	srand(time(NULL));
+	for (i = 0; i < 2*DATA_NUM; i++)
+	{
+		data[i] = rand() % 128;
+	}
+	
+
+	struct timeval tvstart;
+	
+	gettimeofday(&tvstart, NULL);
+	for (i = 1; i <= DATA_NUM; i++)
+	{
+		sendDataMsg(port, (unsigned char *)(data + 2 * (i - 1)), 2, i);
+
+		usleep(100);
+	}
+
+	printf("%d:%d:%d:%ld:%ld\n", 0, 0, -1, tvstart.tv_sec, tvstart.tv_usec);
+	
+	close_serial_source(port);
+	return 0;
+}

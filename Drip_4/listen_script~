@@ -1,0 +1,54 @@
+#!/bin/bash
+
+#motelist | grep "/dev/ttyUSB[0-9]*"
+RESULT=./result
+BASEDIR=./BaseStation
+LISTEN_P=$BASEDIR/receiver
+BASESTAION=$BASEDIR/disseminator
+DISSEMINATOR=/dev/ttyUSB0
+MOTE=/dev/ttyUSB
+BAUDRATE=115200
+
+if [ ! -d $RESULT ]
+then
+	mkdir result
+fi
+
+if [ ! -e $LISTEN_P ]
+then
+	echo "compile receiver"
+	gcc $BASEDIR/receiver.c $BASEDIR/drip_ack_msg.c -o $BASEDIR/receiver -I/opt/tinyos-2.1.1/support/sdk/c/sf -L /opt/tinyos-2.1.1/support/sdk/c/sf -lmote
+fi
+
+if [ ! -e $BASESTAION ]
+then
+	echo "compile bastaion"
+	gcc $BASEDIR/BaseStation.c $BASEDIR/drip_ack_msg.c -o $BASEDIR/disseminator -I/opt/tinyos-2.1.1/support/sdk/c/sf -L /opt/tinyos-2.1.1/support/sdk/c/sf -lmote
+fi
+
+for ((idx = 1; idx < 2; idx++))
+do
+
+	for ((i = 1; i < 6; i++))
+	do
+		if [ -e $MOTE$i ]
+		then
+			$LISTEN_P $MOTE$i $BAUDRATE > $RESULT/$i.tmp &
+		fi
+	done
+
+	$BASESTAION $DISSEMINATOR telosb > $RESULT/0.tmp
+
+	while ps -a | grep -q "receiver"
+	do
+		#echo "receiver exists"
+		sleep 2s
+	done
+
+	cat $RESULT/*.tmp > $RESULT/$idx.log
+
+done
+
+#rm -f $RESULT/*.tmp
+#cat ./result/*.log > result.txt
+
