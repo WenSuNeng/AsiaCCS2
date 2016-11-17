@@ -214,13 +214,15 @@ Another approach has been adopted by some researchers \cite{hashtree}, who use a
 Also, hash chain approach \cite{nested} is a method to verify packet. But its high performance requires good network communication channel. Once wireless network is affected severely, the authentication process behind the lost packet is not able to continue.
  
 \subsection{Review on Message Dissemination}
-Drip is one of the most popular message dissemination protocol in sensor networks. In Drip, each message is represented as a 3-tuple (key, seqno, data), where key uniquely identifies the variable to be updated, data denotes the disseminated data item (e.g., parameter, command or query), and seqno indicates if the data item is old or new (the larger the seqno, the newer the data). In the Drip implementation, key and seqno are 2 bytes and 4 bytes long, respectively. Drip disseminates each data item with a separate instance of Trickle algorithm [14]. Once new data are injected to a receiver by the sender, they will be disseminated by Trickle quickly.
+Drip is one of the most popular message dissemination protocol in sensor networks. In Drip, each message is represented as a 3-tuple (key, seqno, data), where key uniquely identifies the variable to be updated, data denotes the disseminated data item (e.g., parameter, command or query), and seqno indicates if the data item is old or new (the larger the seqno, the newer the data). In the Drip implementation, key and seqno are 2 bytes and 4 bytes long, respectively. Drip disseminates each data item with a separate instance of Trickle algorithm \cite{trickle}. Once new data are injected to a receiver by the sender, they will be disseminated by Trickle quickly.
+
+With Trickle algorithm, the problem of packet loss are greatly improved. Since the goal of a dissemination protocol is to reliably deliver a piece of data to every node in the network.
 	
 	Although we have used Drip for our reference implementation, our mechanism can be extended to other popular broadcast protocols, with the assumptions listed in Section III.C. In the rest of this paper, unless otherwise specified, we assume that Drip is used as the message dissemination protocol
 
 \section{ PROBLEM DEFINITION}
 \subsection{Network Model}
-	We consider a broadcast group involving one sender (\emph{S}) and a group of receivers (\emph{R$_i$}). Each message is delivered from S to each R through lossy and insecure PLC network, as illustrated in Fig. 4. The intermediate receivers in the network only forward the packets and do not provide any security measure (such as integrity and authenticity checks). These receivers may be malicious to drop or modify \emph{S}$'$s packets or even inject fake packets.
+	We consider a broadcast network consists of one sender (\emph{S}) and a group of receivers (\emph{R$_i$}). Each message is delivered from S to every \emph{R$_i$} through lossy and insecure network, as illustrated in Fig. 2. The intermediate receivers in the network only forward the packets and do not provide any security measures (such as integrity and authenticity checks). These receivers may be malicious to drop or modify \emph{S}$'$s packets or even inject fake packets.
 	
 	We consider a class of applications where
 	
@@ -228,7 +230,7 @@ Drip is one of the most popular message dissemination protocol in sensor network
 	
 	2) \emph{S} (resp.\emph{R}) signs (resp. verifies) the message once it appears; 
 	
-	3) the sending rate at \emph{S} is dynamic. The data flow of the broadcast authentication protocol is shown in Fig. 5
+	3) the sending rate at \emph{S} is dynamic. And the data flow of the broadcast authentication protocol is shown in Fig. 5
 	
 	
 \begin{figure}
@@ -237,11 +239,8 @@ Drip is one of the most popular message dissemination protocol in sensor network
 \caption{Network Model}\label{} 
 \end{figure}
 
-	
-
-
 \subsection{Requirement}
-In addition to the asymmetric mechanism that is needed for broadcast authentication, an efficient and secure broadcast authentication scheme for smart grids should still satisfy the following requirements:
+In addition to the asymmetric mechanism that is needed for broadcast authentication, an efficient and secure broadcast authentication scheme for Wireless Sensor Networks should still satisfy the following requirements:
 
 \begin{itemize}
 \item[1] Individual authentication: The receiver should verify the received packets individually without depending on other packets; otherwise, the failure to verify a packet prevents the verification of subsequent packets.
