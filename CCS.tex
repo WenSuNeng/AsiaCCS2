@@ -1,53 +1,7 @@
-% This is "sig-alternate.tex" V2.1 April 2013
-% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
-%
-% This example file demonstrates the use of the 'sig-alternate.cls'
-% V2.5 LaTeX2e document class file. It is for those submitting
-% articles to ACM Conference Proceedings WHO DO NOT WISH TO
-% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
-% The 'sig-alternate.cls' file will produce a similar-looking,
-% albeit, 'tighter' paper resulting in, invariably, fewer pages.
-%
-% ----------------------------------------------------------------------------------------------------------------
-% This .tex file (and associated .cls V2.5) produces:
-%       1) The Permission Statement
-%       2) The Conference (location) Info information
-%       3) The Copyright Line with ACM data
-%       4) NO page numbers
-%
-% as against the acm_proc_article-sp.cls file which
-% DOES NOT produce 1) thru' 3) above.
-%
-% Using 'sig-alternate.cls' you have control, however, from within
-% the source .tex file, over both the CopyrightYear
-% (defaulted to 200X) and the ACM Copyright Data
-% (defaulted to X-XXXXX-XX-X/XX/XX).
-% e.g.
-% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
-% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
-%
-% ---------------------------------------------------------------------------------------------------------------
-% This .tex source is an example which *does* use
-% the .bib file (from which the .bbl file % is produced).
-% REMEMBER HOWEVER: After having produced the .bbl file,
-% and prior to final submission, you *NEED* to 'insert'
-% your .bbl file into your source .tex file so as to provide
-% ONE 'self-contained' source file.
-%
-% ================= IF YOU HAVE QUESTIONS =======================
-% Questions regarding the SIGS styles, SIGS policies and
-% procedures, Conferences etc. should be sent to
-% Adrienne Griscti (griscti@acm.org)
-%
-% Technical questions _only_ to
-% Gerald Murray (murray@hq.acm.org)
-% ===============================================================
-%
-% For tracking purposes - this is V2.0 - May 2012
 
 \documentclass{sig-alternate-05-2015}
 
-
+\usepackage{cite}
 \begin{document}
 
 % Copyright
@@ -210,7 +164,7 @@ Wireless sensor networks are being used in a wide variety of applications, such 
 
 As shown in Fig.1, when deployed in hostile environments, sensor networks are susceptible to a variety of attacks. For example, adversaries are able to easily intercept the messages between base stations and sensor nodes, impersonate the base stations to deceive sensor nodes. 
 
-Many countermeasures such as PKC, have been developed to prevent adversaries from impersonating base stations. But these Countermeasures make sensor networks an easy target of Dos attacks. We provide an example to illustrate this problem. 
+Many countermeasures such as PKC, have been developed to prevent adversaries from impersonating base stations. But these countermeasures make sensor networks an easy target of Dos attacks. We provide an example to illustrate this problem. 
 
 First, as shown in Fig.1, sensors are measuring temperature, the control center may want sensors to measure humidity of the atmosphere instead. In this case, control center need broadcast values to reconfigure the whole network. 
 In mentioned network, communications are based on IEEE 802.11.4 standard. It is open and adversaries can broadcast a large number of bogus messages, exhausting resources of sensor nodes.
@@ -224,19 +178,40 @@ In mentioned network, communications are based on IEEE 802.11.4 standard. It is 
 In order to secure message broadcast in industry control sensor networks.
 This paper has the following major contributions:
 \begin{itemize}
-\item[1] We first investigate the requirements for a secure broadcast mechanism in industry control sensor networks, and then show some security weaknesses and efficiency problems of the existing broadcast authentication mechanisms. 
-\item[2] We propse a secure, lightweight, robust, Dos-resilient authentication mechanism. We make it an secure extentsion of Drip and refine our protocol to reduce bandwidth, computing, energy consumption. 
-\item[3] We implement our protocol on telosb platform. And experimental results in charts demonstrate high efficiency and high performance.
+\item[1] First, We study the specific requirements needed to secure a WSNs protocol. According to security weaknesses and efficiency problem, we 
+review existing broadcast authentication mechanisms.
+\item[2] We propose a secure, lightweight, robust, Dos-resilient authentication mechanism. It is a secure extension of Drip and has advantages over traditional broadcast authentication protocol. 
+\item[3] We conduct extensive experiments with many telosb platforms. And experimental data in chart shows that our mechanism can achieve high efficiency and performance.
 \end{itemize}
 
-\textbf{Organization} The organization of our paper is as follows:  Section II, we discuss the related work, and Section III describes the security requirements and vulnerability of industrial control sensor networks. In Section IV, We present our scheme in detail. Section V analyses the security and efficiency properties of our protocol. Section VI describes the implementation and experimental results of the proposed protocol via real sensor platforms. Finally, Section VII concludes this paper. 
-\section{Related Work}
+\textbf{Organization} The organization of our paper is as follows:  Section II, we discuss the related work as the context of our work, and Section III describes the network model, security requirements and assumption. In Section IV, We present our scheme in detail. Section V analyses the security and efficiency properties of our protocol. Section VI describes the implementation and experimental results of the proposed protocol via real sensor platforms. Finally, Section VII concludes this paper. 
+
+\section{Relate1d Work}
 \subsection{Existing Work on Broadcast Authentication}
-Providing security measures for smart grids encounters many challenges. The primary one is the limited computing, communication and storage capabilities of receivers. A message authentication code (MAC) is an authentication tag derived by applying an efficient symmetric cryptographic primitive for two-party authentication, but it is not suitable for broadcast authentication. Because the sender and its receivers share the same secret key, any one of the receivers can impersonate the sender and forge messages to other receivers. That is, both sender and receivers can authenticate messages. As to asymmetric mechanism, only the sender can sign messages while the receivers can only verify messages, is more suitable for broadcast authentication. More exactly, the sender signs each packet individually using digital signature technique and each receiver verifies the signature before processing the packet. The signature is vulnerable to Dos attacks. That is, the adversary may flood a large number of illegal signature messages to the receivers to exhaust their resources and render them less capable of serving legitimate users. 
+There are many challenges in information security protection of Wireless Sensor Networks. The primary one is the limited computing, communication and storage capabilities of a sensor node. Based on this factor, a number of broadcast authentication schemes, including symmetric key scheme and asymmetric key schemes, have been proposed, . 
 
-To provide authentication, some researchers proposed TESLA and its various extensions to authenticate broadcast packets in a network. It employs symmetric cryptography primitives with delayed key disclosure to authenticate the claimed sender of a broadcast packet, i.e., the key used to authenticate a message is disclosed in the next message. However, these methods requires time synchronization for the whole network, which leads to more complicated measures to secure synchronization. In addition, the receivers cannot authenticate packets immediately, but must wait until the respective keys are disclosed, resulting in excessive verification latency and a requirement to store unauthenticated packets. More importantly, they are vulnerable to a DoS attack due to the authentication delay. Through a simple flooding attack, each receiver has to buffer all forged messages claimed to be from the sender until it receives the disclosed key. Another technique uses one-time signature schemes [10]. Unfortunately, such schemes suffer from large key sizes and a limited number of uses per key.
+A MAC algorithm, sometimes called a keyed hash function, outputs a tag derived by accepting a secret key and an arbitrary-length message as input\cite{TinySec}. The MAC value protects both a message's data integrity as well as its authenticity, by allowing verifiers who also possess the secret key to detect any changes to the message content.
 
- Recently, a message broadcast authentication protocol [11] has computed a hash function of the last message, and then, attached this hash to the previous message. The packet with the hash appended is then itself hashed and this hash value is attached to the previous packet. This process is continued until the first packet is reached. The first packet is signed with the private key of the sender. Each receiver verifies the first packet with the sender's public key, then recursively authenticates each packet using the hashed value from the predecessor packet until all message update has been successfully received. Another approach has been adopted by some researchers [12], [13] who use a Merkle tree instead of recursive hashing for packet authentication. However, in most cases, whether they are recursive or a variant such as a Merkle tree, all are based on the use of a digital signature to sign the first packet. There are three problems associated with these approaches. Firstly, these approaches require the number and content of data packets to be known in advance of the message dissemination process, since they construct a hash chain (or a hash tree) which starts from the last data packet and works back to the first. This requirement limits the expansion of these approaches to some message dissemination applications where often all data items to be broadcast cannot be available beforehand. Secondly, hash chain approach must depend on good communication channel. Once the channel conditions get worse, data packet can not be carried out in accordance with the established order receiving, it is unlikely to validate data integrity. Thirdly, the hash tree method adds additional overhead due to the transmission of part of a hash tree for each data item. Energy is an extremely scarce resource on any device while radio communication consumes the most amount of energy.
+But it is not desirable for broadcast authentication. Since key is shared among senders and receivers, any one of receivers can impersonate sender and forge messages using key.
+
+Along with the development of related technology, asymmetric key schemes become more and more practical in wireless sensor network. 
+
+Public key cryptography, or asymmetric cryptography, is a cryptographic system that uses pairs of keys: public keys which may be disseminated widely, and private keys which are known only to the owner. This typically achieve authentication function when the public key is used to verify identity of the message sender. Because of high computation costs and large signature size, public key cryptography in WSNs is susceptible to Dos attack. That is, the adversary may flood a large number of illegal signature messages to exhaust receivers' resources and render them less capable of serving legitimate users. 
+
+In order to solve above problems, some researchers proposed TESLA\cite{Tesla} and its various extensions \cite{multi} to authenticate broadcast packets in a network.
+
+TESLA is an example protocol in which authentication information is sent post the broadcast message. It employs symmetric cryptographic technique with delayed key disclosure, i.e., the key used to authenticate a message is disclosed in next message. However, time synchronization is required between sender and receiver. \cite{Tesla} have used a direct time synchronization between sender and receiver. Due to delayed key disclosure, TESLA protocol is susceptible to Dos attack.
+
+If adversary sends a huge number of useless packets, it will take sensor nodes large memory space to store these packets until sensor nodes receive authentication key.
+
+Other authentication schemes use one-time signature\cite{Biba},\cite{HORSIC}. Verification and authentication based on one time signature is very fast. Unfortunately, such schemes suffer from large key sizes and a limited number of uses per key.
+
+To reduce cost, authors in \cite{aspect}, \cite{aspect} use a single signature to authenticate multiple data packets. In \cite{aspect}, sender have already known messages in advance and applied hash function to the last message, and output a hash value. Then sender attach this value to the previous message. This process is continued until the first message. Then sender just sign the first message using private key. Thus sender get a signature on all messages to be disseminated. After the first message is verified, the hash value of next message is also verified. We just use this hash value to authenticate next message. And recursively, the last message will be verified through its previous packet. Obviously, this protocol does not adapt to the changing environment, WSNs needs administrator to configure the network frequently, we cannot predict next message to be sent. 
+
+
+Another approach has been adopted by some researchers \cite{hashtree}, who use a Merkle tree instead of recursive hashing for packet authentication. This approach require to include many hash value in a packet, increasing bandwidth consumption.
+
+Also, hash chain approach \cite{nested} is a method to verify packet. But its high performance requires good network communication channel. Once wireless network is affected severely, the authentication process behind the lost packet is not able to continue.
  
 \subsection{Review on Message Dissemination}
 Drip is one of the most popular message dissemination protocol in sensor networks. In Drip, each message is represented as a 3-tuple (key, seqno, data), where key uniquely identifies the variable to be updated, data denotes the disseminated data item (e.g., parameter, command or query), and seqno indicates if the data item is old or new (the larger the seqno, the newer the data). In the Drip implementation, key and seqno are 2 bytes and 4 bytes long, respectively. Drip disseminates each data item with a separate instance of Trickle algorithm [14]. Once new data are injected to a receiver by the sender, they will be disseminated by Trickle quickly.
@@ -366,6 +341,7 @@ Finally, the sender then broadcasts the packet with the payload i | Mi | signatu
 \end{figure}
 
 
+
 \subsection{packet verification phase}
 Upon receiving a broadcast packet, each receiver first verifies the puzzle solution, If the puzzle solution is invalid, the receiver will simply drop this packet. 
 
@@ -429,6 +405,15 @@ Our implementation is very good.
 \caption{DataFigure}\label{fig:SSDArchitecture}
 \end{figure}
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8cm,height=5cm]{converge.eps}
+\end{center}
+\caption{DataFigure}\label{fig:SSDArchitecture}
+\end{figure}
+
+
+The charts in Fig.7 show the average times for each operation phase in TinyECC. This charts shows that ECC with secp128r1 has no advantage over that with secp160r1. It has the similar time consumption with secp160r1. But shortness is a virtue we appreciate in packet broadcast, which consumes major bandwidth and power of sensor node. Besides, in initiation phase, secp128r1 is the fastest. It will help quick deployment of WSNs under some exceptional circumstances.
 
 \begin{figure}[ht]
 \begin{center}
@@ -442,6 +427,7 @@ Our implementation is very good.
 
 In this paper, we have identified the security vulnerabilities in data discovery and dissemination of WSNs. We then developed a lightweight protocol  to allow efficient authentication of the disseminated data items by taking advantage of short-length public key. Our protocol is designed to work within the computation memory and energy limits of inexpensive sensor motes. In addition to analyzing the security of Our protocol, this paper has also reported the evaluation results of Our protocol in an experimental network of resource-limited sensor nodes, which show that our protocol is efficient and feasible in practice.
 
+
 \section{Acknowledgments}
 
 \bibliographystyle{abbrv}
@@ -452,16 +438,28 @@ In this paper, we have identified the security vulnerabilities in data discovery
 
 \begin{thebibliography}{13}
 
+\bibitem{TinySec} Karlof C, Sastry N, Wagner D. TinySec: a link layer security architecture for wireless sensor networks[C]//Proceedings of the 2nd international conference on Embedded networked sensor systems. ACM, 2004: 162-175.
+
+\bibitem{Tesla} Perrig A, Canetti R, Tygar J D, et al. The TESLA broadcast authentication protocol[J]. RSA CryptoBytes, 2005, 5.
+
+\bibitem{multi}Liu D, Ning P. Multilevel μTESLA: Broadcast authentication for distributed sensor networks[J]. ACM Transactions on Embedded Computing Systems (TECS), 2004, 3(4): 800-836.
+
 \bibitem{proceeding1} Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid
 Information Services for Distributed Resource Sharing. In: 10th IEEE
 International Symposium on High Performance Distributed Computing, pp.
 181--184. IEEE Press, New York (2001)
 
-\bibitem{a} Grover K, Lim A.: A survey of broadcast authentication schemes for wireless networks[J]. Ad Hoc Networks, 2015, 24: 288-316.
+\bibitem{HORSIC} Lee J, Kim S, Cho Y, et al. HORSIC: An efficient one-time signature scheme for wireless sensor networks[J]. Information Processing Letters, 2012, 112(20): 783-787.
+
+\bibitem{asurvey} Grover K, Lim A.: A survey of broadcast authentication schemes for wireless networks[J]. Ad Hoc Networks, 2015, 24: 288-316.
 
 \bibitem{Biba} Perrig A.: The BiBa one-time signature and broadcast authentication protocol[C]//Proceedings of the 8th ACM conference on Computer and Communications Security. ACM, 2001: 28-37.
 
 \bibitem{aspect} He D, Chan S C, Guizani M.: Small data dissemination for wireless sensor networks: The security aspect[J]. Wireless Communications, IEEE, 2014, 21(3): 110-116.
+
+\bibitem{nested} Eldefrawy M H, Khan M K, Alghathbar K, et al. Broadcast authentication for wireless sensor networks using nested hashing and the Chinese remainder theorem[J]. Sensors, 2010, 10(9): 8683-8695.
+
+\bibitem{hashtree}He D, Chan S, Tang S, et al. Secure data discovery and dissemination based on hash tree for wireless sensor networks[J]. IEEE transactions on wireless communications, 2013, 12(9): 4638-4646.
 
 \bibitem{efficient} Perrig A, Canetti R, Tygar J D, et al.: Efficient authentication and signing of multicast streams over lossy channels[C]//Security and Privacy, 2000. IEEE Symposium on. IEEE, 2000: 56-73.%Here I delete S&P 2000
 
