@@ -222,16 +222,11 @@ With Trickle algorithm, the problem of packet loss are greatly improved. Since t
 
 \section{ PROBLEM DEFINITION}
 \subsection{Network Model}
-	We consider a broadcast network consists of one sender (\emph{S}) and a group of receivers (\emph{R$_i$}). Each message is delivered from S to every \emph{R$_i$} through lossy and insecure network, as illustrated in Fig. 2. The intermediate receivers in the network only forward the packets and do not provide any security measures (such as integrity and authenticity checks). These receivers may be malicious to drop or modify \emph{S}$'$s packets or even inject fake packets.
+	Fig.2 demonstrates what a conventional WSNs consists of. Basestation (Sender, S) is trying to communicate with these sensors (Receiver, R), exchanging data. These data may tell sensor nodes what to do next, or just ensure communication channel is under normal state.
 	
-	We consider a class of applications where
-	
-	1) each generated message is unknown to \emph{S} until it is ready to send; 
-	
-	2) \emph{S} (resp.\emph{R}) signs (resp. verifies) the message once it appears; 
-	
-	3) the sending rate at \emph{S} is dynamic. And the data flow of the broadcast authentication protocol is shown in Fig. 5
-	
+The adversary is different from both basestation and sensor nodes. Actually, the adversary is able to destroy the network in many ways, including eavedropping for sensitive information, injecting malicious information, replaying previously intercepted messages, or impersonating valid sensor nodes.
+
+When adversary combines these methods together, it will get a large amount of valuable information about WSNs. From disseminated packets and distributed sensors, key materials will be  compromised as adversary intercepts packet, reads data from sensors' memory.
 	
 \begin{figure}
 \centering
@@ -240,28 +235,33 @@ With Trickle algorithm, the problem of packet loss are greatly improved. Since t
 \end{figure}
 
 \subsection{Requirement}
-In addition to the asymmetric mechanism that is needed for broadcast authentication, an efficient and secure broadcast authentication scheme for Wireless Sensor Networks should still satisfy the following requirements:
+
+An efficient and secure broadcast authentication scheme comes with many requirements, not only just using asymmetric key schemes.
+
+ 
 
 \begin{itemize}
-\item[1] Individual authentication: The receiver should verify the received packets individually without depending on other packets; otherwise, the failure to verify a packet prevents the verification of subsequent packets.
+\item[1] 
+Independent authentication: The information included in received packet can be used for verifying itself without depending on other packets. Otherwise packet-loss will put an end up to whole process of dissemination.
 
-\item[2] Robust to packet loss: The smart grid communication environment is not reliable; therefore, the scheme should be able to cope with the loss of packets during trans- mission.
+\item[2] Robust to packet loss: A general wireless sensor network may suffer from packet-loss, which is a problem to most wireless sensor network. But the concrete protocol we discuss, Drip, is typically designed to make network reliable. Its timing algorithm, Trickle, converges every node on the same data by frequently exchanging data.
 
-\item[3] Short authentication latency: Many PLC applications are real time applications, e.g. sending the control informa- tion to the customers. To authenticate real time data, the maximum number of additional packets that need to be received before a packet can be authenticated should be small.
+\item[3] WSNs usually are deployed in military or industrial control fields and draw instant information from environment constantly. 
+Using a signature to verify multiple messages seems impractical, since it hard to predict next message to be sent next.
 
-\item[4] Low computation cost: Receivers have limited compu- tation power. Thus, they should only perform a small number of operations to verify a packet.
+\item[4] Low computation cost: Broadcast authentication scheme should works to secure network communication without increasing computation cost and energy consumption. 
 
-\item[5] Receiver compromise tolerance: The protocol should be resilient to receiver compromise attack no matter how many receivers have been compromised, as long as the subset of non-compromised receivers can still form a connected graph with the trusted source.
+\item[5] Receiver compromise tolerance: Even a large number sensor nodes is compromised, the protocol should ensure no valuable information be  extracted from sensor nodes. Thus the key material used to do verification must be specially handled.
 
-\item[6] Low communication overhead: Because a PLC network often is restricted in bandwidth, the number of bytes per packet used for authentication should be small.
+\item[6] Low communication overhead: Small is the number of bytes per pakcet, while communication consumes most of the power resources on sensors.
 
-\item[7] DoS attacks resistance: The functions of the PLC net- work should not be disrupted by DoS attacks.
+\item[7] DoS attacks resistance: The functions of the Wireless network should not be disrupted by DoS attacks.
 
 \item[8] Freshness: A receiver should be able to differentiate whether an incoming message is the newest version.
 
-\item[9] Scalability: The protocol should be efficient even for large-scale smart grids with thousands of receivers.
+\item[9] Scalability: The protocol should allow recipients temporarily offline and new entrants to connect the network again through  simple verification process.
 
-\item[10] Low storage requirement: Since the storage space of receivers is limited, some data for authentication like key material and signatures stored in memory cannot be too large.
+\item[10] Low storage requirement: The storage space for key material such as signature should be limited to make sensors perform more function.
 \end{itemize}
 
 \begin{figure}
@@ -269,13 +269,17 @@ In addition to the asymmetric mechanism that is needed for broadcast authenticat
 \includegraphics[width=8cm,height=4cm]{DataFlow.pdf}\\
 \caption{DataFlow}\label{} 
 \end{figure}
+No matter how many times has a protocol been improved,
+it still cost bandwidth, energy, memory to make the WSNs function safely. In practice, dedicate tradeoff between energy consumption and efficiency needs to be found.
 
-Ideally, we would like a scheme that is able to recover from any loss of packets, has no authentication latency, can individually authenticate packets and ensure data confidentiality, has negligible overhead, and has a low computation cost. In practice, such a perfect scheme is difficult to achieve, and a compromise needs to be found between these requirements.
 \subsection{Assumption}
 Our protocol makes the following assumption.
 \begin{itemize}
-    \item The sender cannot be compromised, and is trusted. In Drip, the sender is the origin of all legitimate message updates. The sender has unlimited computational power compared with receiver.
-    \item  The receiver can perform a limited number of asymmetric cryptographic operations such as signature verification in TinyECC [15], but they cannot afford to perform many such operations due to their energy limitations.
+    \item The legitimacy of sender can not be questioned. 
+    \item  
+    Few operations can a receiver be performed. Since sensor can perform a number of verification operations.
+    The receiver can perform a limited number of 
+    
 \end{itemize}
 \section{The Proposed Protocol}
 Before giving the detailed description of the proposed protocol, we first provide an overview of our protocol.
