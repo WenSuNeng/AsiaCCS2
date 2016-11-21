@@ -83,7 +83,7 @@ Yan Wang\\
        \email{boliangzai@foxmail.com}
 % 2nd. author
 \alignauthor
-Daojing he\\
+Daojing He\\
        \affaddr{East China Normal University}\\
        \affaddr{No.3663,Zhongshanbei Road}\\
        \affaddr{Putuo District,Shanghai,China}\\
@@ -166,12 +166,12 @@ As shown in Fig.1, when deployed in hostile environments, sensor networks are su
 Many countermeasures such as PKC, have been developed to prevent adversaries from impersonating base stations. But these countermeasures make sensor networks an easy target of Dos attacks. We provide an example to illustrate this problem. 
 
 First, as shown in Fig.1, sensors are measuring temperature, the control center may want sensors to measure humidity of the atmosphere instead. In this case, control center need broadcast values to reconfigure the whole network. 
-In mentioned network, communications are based on IEEE 802.11.4 standard. It is open and adversaries can broadcast a large number of bogus messages, exhausting resources of sensor nodes.
+In mentioned network, communications are based on IEEE 802.11.4 standard. Adversaries can broadcast a large number of bogus messages, exhausting resources of sensor nodes.
 
 \begin{figure}
 \centering
-\includegraphics[width=5cm,height=4cm]{Attack_scenario.pdf}\\
-\caption{Attack scenario}\label{} 
+\includegraphics[width=8cm,height=5cm]{Attack_Scenario2.pdf}\\
+\caption{Attack scenario}\label{}   
 \end{figure}
 
 In order to secure message broadcast in industry control sensor networks.
@@ -187,11 +187,11 @@ review existing broadcast authentication mechanisms.
 
 \section{Relate1d Work}
 \subsection{Existing Work on Broadcast Authentication}
-There are many challenges in information security protection of Wireless Sensor Networks. The primary one is the limited computing, communication and storage capabilities of a sensor node. Based on this factor, a number of broadcast authentication schemes, including symmetric key scheme and asymmetric key schemes, have been proposed, . 
+There are many challenges of information security in Wireless Sensor Networks. The primary one is the limited computing, communication and storage capabilities of a sensor node. Based on this factor, a number of broadcast authentication schemes, including symmetric key scheme and asymmetric key schemes, have been proposed, . 
 
-A MAC algorithm, sometimes called a keyed hash function, outputs a tag derived by accepting a secret key and an arbitrary-length message as input\cite{TinySec}. The MAC value protects both a message's data integrity as well as its authenticity, by allowing verifiers who also possess the secret key to detect any changes to the message content.
+A MAC algorithm, sometimes called a keyed hash function, outputs a tag derived by accepting a secret key and an arbitrary-length message as input\cite{TinySec}. By allowing verifiers who also possess the secret key to detect any changes to the message content, the MAC value protects both a message's data integrity as well as its authenticity.
 
-But it is not desirable for broadcast authentication. Since key is shared among senders and receivers, any one of receivers can impersonate sender and forge messages using key.
+But it is not desirable for broadcast authentication. Since key is shared among senders and receivers, any one of receivers can impersonate sender and forge messages.
 
 Along with the development of related technology, asymmetric key schemes become more and more practical in wireless sensor network. 
 
@@ -199,18 +199,18 @@ Public key cryptography, or asymmetric cryptography, is a cryptographic system t
 
 In order to solve above problems, some researchers proposed TESLA\cite{Tesla} and its various extensions \cite{multi} to authenticate broadcast packets in a network.
 
-TESLA is an example protocol in which authentication information is sent post the broadcast message. It employs symmetric cryptographic technique with delayed key disclosure, i.e., the key used to authenticate a message is disclosed in next message. However, time synchronization is required between sender and receiver. \cite{Tesla} have used a direct time synchronization between sender and receiver. Due to delayed key disclosure, TESLA protocol is susceptible to Dos attack.
+TESLA is an example protocol in which authentication information is sent post the broadcast message. It employs symmetric cryptographic technique with delayed key disclosure, i.e., the key used to authenticate a message is disclosed in next message. However, time synchronization is required between sender and receiver. \cite{Tesla} has used a direct time synchronization between sender and receiver, making WSNs susceptible to Dos attack.
 
-If adversary sends a huge number of useless packets, it will take sensor nodes large memory space to store these packets until sensor nodes receive authentication key.
+On the other hand, if adversary sends a huge number of useless packets, it will take sensor nodes large memory space to store these packets until sensor nodes receive authentication key.
 
 Other authentication schemes use one-time signature\cite{Biba},\cite{HORSIC}. Verification and authentication based on one time signature is very fast. Unfortunately, such schemes suffer from large key sizes and a limited number of uses per key.
 
-To reduce cost, authors in \cite{aspect}, \cite{aspect} use a single signature to authenticate multiple data packets. In \cite{aspect}, sender have already known messages in advance and applied hash function to the last message, and output a hash value. Then sender attach this value to the previous message. This process is continued until the first message. Then sender just sign the first message using private key. Thus sender get a signature on all messages to be disseminated. After the first message is verified, the hash value of next message is also verified. We just use this hash value to authenticate next message. And recursively, the last message will be verified through its previous packet. Obviously, this protocol does not adapt to the changing environment, WSNs needs administrator to configure the network frequently, we cannot predict next message to be sent. 
+To reduce cost, authors in \cite{aspect} use a single signature to authenticate multiple data packets. In \cite{aspect}, sender have already known messages in advance and applied hash function to the last message and output a hash value. Then sender attach this value to the previous message. This process is continued until the first message. Then sender just sign the first message using private key. Thus sender get a signature on all messages to be disseminated. After the first message is verified, the hash value of next message is also verified. We just use this hash value to authenticate next message. And recursively, the last message will be verified through its previous packet. Obviously, this protocol does not adapt to the changing environment, WSNs needs administrator to configure the network frequently, we cannot predict the next message to be sent. 
 
 
-Another approach has been adopted by some researchers \cite{hashtree}, who use a Merkle tree instead of recursive hashing for packet authentication. This approach require to include many hash value in a packet, increasing bandwidth consumption.
+Another approach has been adopted by some researchers \cite{hashtree}, who use a Merkle tree instead of recursive hashing for packet authentication. This approach requires to include many extra hash value in a packet, increasing bandwidth consumption.
 
-Also, hash chain approach \cite{nested} is a method to verify packet. But its high performance requires good network communication channel. Once wireless network is affected severely, the authentication process behind the lost packet is not able to continue.
+Also, hash chain approach \cite{nested} is an energy-efficient method to do packet verification. But its high performance requires network not too noisy.  Once wireless network is affected severely and packets containing key information is lost, the authentication process behind the lost packets stops.
  
 \subsection{Review on Message Dissemination}
 Drip is one of the most popular message dissemination protocol in sensor networks. In Drip, each message is represented as a 3-tuple (key, seqno, data), where key uniquely identifies the variable to be updated, data denotes the disseminated data item (e.g., parameter, command or query), and seqno indicates if the data item is old or new (the larger the seqno, the newer the data). In the Drip implementation, key and seqno are 2 bytes and 4 bytes long, respectively. Drip disseminates each data item with a separate instance of Trickle algorithm \cite{trickle}. Once new data are injected to a receiver by the sender, they will be disseminated by Trickle quickly.
