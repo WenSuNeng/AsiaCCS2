@@ -203,26 +203,25 @@ TESLA is an example protocol in which authentication information is sent post th
 
 On the other hand, if adversary sends a huge number of useless packets, it will take sensor nodes large memory space to store these packets until sensor nodes receive authentication key.
 
-Other authentication schemes use one-time signature\cite{Biba},\cite{HORSIC}. Verification and authentication based on one time signature is very fast. Unfortunately, such schemes suffer from large key sizes and a limited number of uses per key.
+Other authentication schemes use one-time signature \cite{Biba}, \cite{HORSIC}. Verification and authentication based on one time signature is very fast. Unfortunately, such schemes suffer from large key sizes and a limited number of uses per key.
 
 To reduce cost, authors in \cite{aspect} use a single signature to authenticate multiple data packets. In \cite{aspect}, sender have already known messages in advance and applied hash function to the last message and output a hash value. Then sender attach this value to the previous message. This process is continued until the first message. Then sender just sign the first message using private key. Thus sender get a signature on all messages to be disseminated. After the first message is verified, the hash value of next message is also verified. We just use this hash value to authenticate next message. And recursively, the last message will be verified through its previous packet. Obviously, this protocol does not adapt to the changing environment, WSNs needs administrator to configure the network frequently, we cannot predict the next message to be sent. 
 
 
-Another approach has been adopted by some researchers \cite{hashtree}, who use a Merkle tree instead of recursive hashing for packet authentication. This approach requires to include many extra hash value in a packet, increasing bandwidth consumption.
+Another approach has been adopted by some researchers \cite{hashtree} , who use a Merkle tree instead of recursive hashing for packet authentication. This approach requires to include many extra hash value in a packet, increasing bandwidth consumption.
 
 Also, hash chain approach \cite{nested} is an energy-efficient method to do packet verification. But its high performance requires network not too noisy.  Once wireless network is affected severely and packets containing key information is lost, the authentication process behind the lost packets stops.
  
 \subsection{Review on Message Dissemination}
-Drip is one of the most popular message dissemination protocol in sensor networks. In Drip, each message is represented as a 3-tuple (key, seqno, data), where key uniquely identifies the variable to be updated, data denotes the disseminated data item (e.g., parameter, command or query), and seqno indicates if the data item is old or new (the larger the seqno, the newer the data). In the Drip implementation, key and seqno are 2 bytes and 4 bytes long, respectively. Drip disseminates each data item with a separate instance of Trickle algorithm \cite{trickle}. Once new data are injected to a receiver by the sender, they will be disseminated by Trickle quickly.
+Drip is one of the most popular message dissemination protocol in sensor networks based on TinyOS \cite{tinyos} . In Drip, each message is expressed as a 3-tuple (key, seqno, data), where key uniquely identifies the variable to be updated, data denotes the disseminated data item (e.g., parameter, command or query), and seqno indicates if the data item is old or new, new data has  the greater seqno number. In the Drip implementation, key and seqno are 2 bytes and 4 bytes respectively. In Drip, a separate instance of Trickle algorithm \cite{trickle} is for a disseminated data item. Once new data are injected to a receiver by the sender, they will be disseminated by Trickle quickly. And the whole Network will converge on this data through Trickle algorithm. 
 
 With Trickle algorithm, the problem of packet loss are greatly improved. Since the goal of a dissemination protocol is to reliably deliver a piece of data to every node in the network.
 	
-	Although we have used Drip for our reference implementation, our mechanism can be extended to other popular broadcast protocols, with the assumptions listed in Section III.C. In the rest of this paper, unless otherwise specified, we assume that Drip is used as the message dissemination protocol
+	Although we have used Drip for our reference implementation, our mechanism can be extended to other popular broadcast protocols, with the assumptions listed in Section III.III. In the rest of this paper, unless otherwise specified, we assume that Drip is used as the message dissemination protocol
 
 \section{ PROBLEM DEFINITION}
 \subsection{Network Model}
-	demonstrate 
-	We consider a broadcast network consists of one sender (\emph{S}) and a group of receivers (\emph{R$_i$}). Each message is delivered from S to every \emph{R$_i$} through lossy and insecure network, as illustrated in Fig. 2. The intermediate receivers in the network only forward the packets and do not provide any security measures (such as integrity and authenticity checks). These receivers may be malicious to drop or modify \emph{S}$'$s packets or even inject fake packets.
+	We consider a broadcast network consists of one sender (\emph{S}) and a group of receivers (\emph{R$_i$}). As illustrated in Fig. 2, each message is delivered from S to every \emph{R$_i$} through lossy and insecure network. The intermediate receivers in the network only forward the packets and do not provide any security measures (such as integrity and authenticity checks). Besides, these receivers may be malicious to drop or modify \emph{S}$'$s packets or even inject fake packets.
 	
 	We consider a class of applications where
 	
@@ -235,7 +234,7 @@ With Trickle algorithm, the problem of packet loss are greatly improved. Since t
 	
 \begin{figure}
 \centering
-\includegraphics[width=6cm,height=4cm]{NetworkModel.pdf}\\
+\includegraphics[width=6cm,height=4cm]{antenna.pdf}\\
 \caption{Network Model}\label{} 
 \end{figure}
 
@@ -443,22 +442,17 @@ In this paper, we have identified the security vulnerabilities in data discovery
 
 \bibitem{multi}Liu D, Ning P. Multilevel μTESLA: Broadcast authentication for distributed sensor networks[J]. ACM Transactions on Embedded Computing Systems (TECS), 2004, 3(4): 800-836.
 
-\bibitem{proceeding1} Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid
-Information Services for Distributed Resource Sharing. In: 10th IEEE
-International Symposium on High Performance Distributed Computing, pp.
-181--184. IEEE Press, New York (2001)
+\bibitem{Biba} Perrig A.: The BiBa one-time signature and broadcast authentication protocol[C]//Proceedings of the 8th ACM conference on Computer and Communications Security. ACM, 2001: 28-37.
 
 \bibitem{HORSIC} Lee J, Kim S, Cho Y, et al. HORSIC: An efficient one-time signature scheme for wireless sensor networks[J]. Information Processing Letters, 2012, 112(20): 783-787.
 
-\bibitem{asurvey} Grover K, Lim A.: A survey of broadcast authentication schemes for wireless networks[J]. Ad Hoc Networks, 2015, 24: 288-316.
-
-\bibitem{Biba} Perrig A.: The BiBa one-time signature and broadcast authentication protocol[C]//Proceedings of the 8th ACM conference on Computer and Communications Security. ACM, 2001: 28-37.
-
 \bibitem{aspect} He D, Chan S C, Guizani M.: Small data dissemination for wireless sensor networks: The security aspect[J]. Wireless Communications, IEEE, 2014, 21(3): 110-116.
+
+\bibitem{hashtree} He D, Chan S, Tang S, et al. Secure data discovery and dissemination based on hash tree for wireless sensor networks[J]. IEEE transactions on wireless communications, 2013, 12(9): 4638-4646.
 
 \bibitem{nested} Eldefrawy M H, Khan M K, Alghathbar K, et al. Broadcast authentication for wireless sensor networks using nested hashing and the Chinese remainder theorem[J]. Sensors, 2010, 10(9): 8683-8695.
 
-\bibitem{hashtree}He D, Chan S, Tang S, et al. Secure data discovery and dissemination based on hash tree for wireless sensor networks[J]. IEEE transactions on wireless communications, 2013, 12(9): 4638-4646.
+\bibitem{tinyos} http://www.tinyos.net/
 
 \bibitem{efficient} Perrig A, Canetti R, Tygar J D, et al.: Efficient authentication and signing of multicast streams over lossy channels[C]//Security and Privacy, 2000. IEEE Symposium on. IEEE, 2000: 56-73.%Here I delete S&P 2000
 
@@ -476,5 +470,8 @@ Integration. Technical report, Global Grid Forum (2002)
 \bibitem{url} National Center for Biotechnology Information, http://www.ncbi.nlm.nih.gov
 
 \bibitem{Msp}He D, Chan S C, Tang S, et al. Secure Data Discovery and Dissemination based on Hash Tree for Wireless Sensor Networks[J]. IEEE Transactions on Wireless Communications, 2013, 12(9):4638-4646.
+
+\bibitem{asurvey} Grover K, Lim A.: A survey of broadcast authentication schemes for wireless networks[J]. Ad Hoc Networks, 2015, 24: 288-316.
+
 \end{thebibliography}
 \end{document}
