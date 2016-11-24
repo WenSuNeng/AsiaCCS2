@@ -1,17 +1,11 @@
 \documentclass{sig-alternate-05-2015}
 
 \usepackage{cite}
+\usepackage[dvipsnames,usenames]{color}
 \begin{document}
 
-% Copyright
-\setcopyright{acmcopyright}
-%\setcopyright{acmlicensed}
-%\setcopyright{rightsretained}
-%\setcopyright{usgov}
-%\setcopyright{usgovmixed}
-%\setcopyright{cagov}
-%\setcopyright{cagovmixed}
 
+\setcopyright{acmcopyright}
 
 % DOI
 \doi{10.475/123_4}
@@ -32,37 +26,8 @@
 % --- End of Author Metadata ---
 
 \title{Secure data Discovery and dissemination based on {short-length} public key scheme in Wireless sensor networks  }
-%\subtitle{[Extended Abstract]
-%\titlenote{}}
-%
-% You need the command \numberofauthors to handle the 'placement
-% and alignment' of the authors beneath the title.
-%
-% For aesthetic reasons, we recommend 'three authors at a time'
-% i.e. three 'name/affiliation blocks' be placed beneath the title.
-%
-% NOTE: You are NOT restricted in how many 'rows' of
-% "name/affiliations" may appear. We just ask that you restrict
-% the number of 'columns' to three.
-%
-% Because of the available 'opening page real-estate'
-% we ask you to refrain from putting more than six authors
-% (two rows with three columns) beneath the article title.
-% More than six makes the first-page appear very cluttered indeed.
-%
-% Use the \alignauthor commands to handle the names
-% and affiliations for an 'aesthetic maximum' of six authors.
-% Add names, affiliations, addresses for
-% the seventh etc. author(s) as the argument for the
-% \additionalauthors command.
-% These 'additional authors' will be output/set for you
-% without further effort on your part as the last section in
-% the body of your article BEFORE References or any Appendices.
 
-\numberofauthors{2} %  in this sample file, there are a *total*
-% of EIGHT authors. SIX appear on the 'first-page' (for formatting
-% reasons) and the remaining two appear in the \additionalauthors section.
-%
+\numberofauthors{2} 
 \author{
 % You can go ahead and credit any number of authors here,
 % e.g. one 'row of three' or two rows (consisting of one row of three
@@ -101,7 +66,7 @@ Daojing He\\
 \maketitle
 \begin{abstract}
 
-In Wireless Sensor Networks, WSNs, dissemination is typically used to query nodes, send commands, and reconfigure the network. In fact, WSNs are always deployed in harsh and open environment, it is important to judge messages as if they are from trusted source. Authentication can be satisfied by Public Key Cryptography (PKC). But PKC operations are expensive in terms of bandwidth, computing and storage consumption. To reduce costs, we propose a lightweight and Dos-resilient broadcast authentication mechanism using short-length public/private keys and presents its application in securing Drip protocol, an open source message dissemination protocol. We compare our mechanism with traditional 160-bit ECC public-key schemes, and show that our scheme can achieve a significant improvement on energy consumptions. Besides, we believe that our mechanism is able to fulfill the broadcast authentication requirements of WSNs.
+In Wireless Sensor Networks, WSNs, dissemination is typically used to query nodes, send commands, and reconfigure the network. In fact, WSNs are always deployed in harsh and open environment, it is important to judge messages as if they are from trusted source. Authentication can be satisfied by Public Key Cryptography (PKC). But PKC operations are expensive in terms of bandwidth, computing and storage consumption. To reduce costs, we propose a lightweight and Dos-resilient broadcast authentication mechanism using short-length public/private keys and presents its application in securing Drip protocol, an open source message dissemination protocol. We compare our mechanism with traditional 160-bit ECC public-key schemes, and show that our scheme can achieve a significant improvement on energy consumptions. Besides, we believe that our mechanism fulfills the broadcast authentication requirements of WSNs.
 
 \end{abstract}
 
@@ -185,7 +150,7 @@ review existing broadcast authentication mechanisms.
 
 \textbf{Organization} The organization of our paper is as follows:  Section II, we discuss the related work as the context of our work, and Section III describes the network model, security requirements and assumption. In Section IV, We present our scheme in detail. Section V analyses the security and efficiency properties of our protocol. Section VI describes the implementation and experimental results of the proposed protocol via real sensor platforms. Finally, Section VII concludes this paper. 
 
-\section{Relate1d Work}
+\section{Related Work}
 \subsection{Existing Work on Broadcast Authentication}
 There are many challenges of information security in Wireless Sensor Networks. The primary one is the limited computing, communication and storage capabilities of a sensor node. Based on this factor, a number of broadcast authentication schemes, including symmetric key scheme and asymmetric key schemes, have been proposed, . 
 
@@ -213,24 +178,19 @@ Another approach has been adopted by some researchers \cite{hashtree} , who use 
 Also, hash chain approach \cite{nested} is an energy-efficient method to do packet verification. But its high performance requires network not too noisy.  Once wireless network is affected severely and packets containing key information is lost, the authentication process behind the lost packets stops.
  
 \subsection{Review on Message Dissemination}
-Drip is one of the most popular message dissemination protocol in sensor networks based on TinyOS \cite{tinyos} . In Drip, each message is expressed as a 3-tuple (key, seqno, data), where key uniquely identifies the variable to be updated, data denotes the disseminated data item (e.g., parameter, command or query), and seqno indicates if the data item is old or new, new data has  the greater seqno number. In the Drip implementation, key and seqno are 2 bytes and 4 bytes respectively. In Drip, a separate instance of Trickle algorithm \cite{trickle} is for a disseminated data item. Once new data are injected to a receiver by the sender, they will be disseminated by Trickle quickly. And the whole Network will converge on this data through Trickle algorithm. 
+Drip is one of the most popular message dissemination protocol in sensor networks based on TinyOS \cite{tinyos} . In Drip, each message is expressed as a 3-tuple (key, seqno, data), where key uniquely identifies the variable to be updated, data denotes the disseminated data item (e.g., parameter, command or query), and seqno indicates if the data item is old or new, new data has  the greater seqno number. In the Drip implementation, key and seqno are 2 bytes and 4 bytes respectively. In Drip, a separate instance of Trickle algorithm  \cite{trickle} is for a disseminated data item. Once new data are injected to a receiver by the sender, they will be disseminated by Trickle quickly. And the whole Network will converge on this data through Trickle algorithm. 
 
 With Trickle algorithm, the problem of packet loss are greatly improved. Since the goal of a dissemination protocol is to reliably deliver a piece of data to every node in the network.
 	
 	Although we have used Drip for our reference implementation, our mechanism can be extended to other popular broadcast protocols, with the assumptions listed in Section III.III. In the rest of this paper, unless otherwise specified, we assume that Drip is used as the message dissemination protocol
 
 \section{ PROBLEM DEFINITION}
-\subsection{Network Model}
-	We consider a broadcast network consists of one sender (\emph{S}) and a group of receivers (\emph{R$_i$}). As illustrated in Fig. 2, each message is delivered from S to every \emph{R$_i$} through lossy and insecure network. The intermediate receivers in the network only forward the packets and do not provide any security measures (such as integrity and authenticity checks). Besides, these receivers may be malicious to drop or modify \emph{S}$'$s packets or even inject fake packets.
+\subsection{Network Model}	
+	Fig.2 demonstrates what a conventional WSNs consists of. Basestation (Sender, \emph{S}) is trying to communicate with these sensors (Receiver, \emph{R$_i$}), exchanging data. These data may tell sensor nodes what to do next, or just ensure communication channel is under normal state.
 	
-	We consider a class of applications where
-	
-	1) each generated message is unknown to \emph{S} until it is ready to send; 
-	
-	2) \emph{S} (resp.\emph{R}) signs (resp. verifies) the message once it appears; 
-	
-	3) the sending rate at \emph{S} is dynamic. And the data flow of the broadcast authentication protocol is shown in Fig. 5
-	
+The adversary is different from both basestation and sensor nodes. Actually, the adversary is able to destroy the network in many ways, including eavedropping for sensitive information, injecting malicious information, replaying previously intercepted messages, or impersonating valid sensor nodes.
+
+When adversary combines these methods together, it will get a large amount of valuable information about WSNs. From disseminated packets and distributed sensors, key materials will be compromised as adversary intercepts packet, reads data from sensors' memory.
 	
 \begin{figure}
 \centering
@@ -239,28 +199,31 @@ With Trickle algorithm, the problem of packet loss are greatly improved. Since t
 \end{figure}
 
 \subsection{Requirement}
-In addition to the asymmetric mechanism that is needed for broadcast authentication, an efficient and secure broadcast authentication scheme for Wireless Sensor Networks should still satisfy the following requirements:
+
+An efficient and secure broadcast authentication scheme comes with many requirements, not only just using asymmetric key schemes.
 
 \begin{itemize}
-\item[1] Individual authentication: The receiver should verify the received packets individually without depending on other packets; otherwise, the failure to verify a packet prevents the verification of subsequent packets.
+\item[1] 
+Independent authentication: The information included in received packet can be used for verifying itself without depending on other packets. Otherwise packet-loss will put an end up to whole process of dissemination.
 
-\item[2] Robust to packet loss: The smart grid communication environment is not reliable; therefore, the scheme should be able to cope with the loss of packets during trans- mission.
+\item[2] Robust to packet loss: A general wireless sensor network may suffer from packet-loss, which is a problem to most wireless sensor network. But the concrete protocol we discuss, Drip, is typically designed to make network reliable. Its timing algorithm, Trickle, converges every node on the same data by frequently exchanging data.
 
-\item[3] Short authentication latency: Many PLC applications are real time applications, e.g. sending the control informa- tion to the customers. To authenticate real time data, the maximum number of additional packets that need to be received before a packet can be authenticated should be small.
+\item[3] WSNs usually are deployed in military or industrial control fields and draw instant information from environment constantly. 
+Using a signature to verify multiple messages seems impractical, since it hard to predict next message to be sent next.
 
-\item[4] Low computation cost: Receivers have limited compu- tation power. Thus, they should only perform a small number of operations to verify a packet.
+\item[4] Low computation cost: Broadcast authentication scheme should works to secure network communication without increasing computation cost and energy consumption. 
 
-\item[5] Receiver compromise tolerance: The protocol should be resilient to receiver compromise attack no matter how many receivers have been compromised, as long as the subset of non-compromised receivers can still form a connected graph with the trusted source.
+\item[5] Receiver compromise tolerance: Even a large number sensor nodes is compromised, the protocol should ensure no valuable information be  extracted from sensor nodes. Thus the key material used to do verification must be specially handled.
 
-\item[6] Low communication overhead: Because a PLC network often is restricted in bandwidth, the number of bytes per packet used for authentication should be small.
+\item[6] Low communication overhead: Small is the number of bytes per pakcet, while communication consumes most of the power resources on sensors.
 
-\item[7] DoS attacks resistance: The functions of the PLC net- work should not be disrupted by DoS attacks.
+\item[7] DoS attacks resistance: The functions of the Wireless network should not be disrupted by DoS attacks.
 
 \item[8] Freshness: A receiver should be able to differentiate whether an incoming message is the newest version.
 
-\item[9] Scalability: The protocol should be efficient even for large-scale smart grids with thousands of receivers.
+\item[9] Scalability: The protocol should allow recipients temporarily offline and new entrants to connect the network again through  simple verification process.
 
-\item[10] Low storage requirement: Since the storage space of receivers is limited, some data for authentication like key material and signatures stored in memory cannot be too large.
+\item[10] Low storage requirement: The storage space for key material such as signature should be limited to make sensors perform more function.
 \end{itemize}
 
 \begin{figure}
@@ -268,23 +231,30 @@ In addition to the asymmetric mechanism that is needed for broadcast authenticat
 \includegraphics[width=8cm,height=4cm]{DataFlow.pdf}\\
 \caption{DataFlow}\label{} 
 \end{figure}
+No matter what method  a protocol use,
+it still cost bandwidth, energy, memory to make the WSNs function safely. In practice, dedicate tradeoff between energy consumption and efficiency needs to be found.
 
-Ideally, we would like a scheme that is able to recover from any loss of packets, has no authentication latency, can individually authenticate packets and ensure data confidentiality, has negligible overhead, and has a low computation cost. In practice, such a perfect scheme is difficult to achieve, and a compromise needs to be found between these requirements.
 \subsection{Assumption}
 Our protocol makes the following assumption.
 \begin{itemize}
-    \item The sender cannot be compromised, and is trusted. In Drip, the sender is the origin of all legitimate message updates. The sender has unlimited computational power compared with receiver.
-    \item  The receiver can perform a limited number of asymmetric cryptographic operations such as signature verification in TinyECC [15], but they cannot afford to perform many such operations due to their energy limitations.
+    \item The legitimacy of valid sender can not be questioned, that is the basestation has no intention to destroy WSNs.
+    \item  
+    Sensors are able to perform a number of verification operations, such as ECDSA verification and hash function.
 \end{itemize}
 \section{The Proposed Protocol}
 Before giving the detailed description of the proposed protocol, we first provide an overview of our protocol.
 \subsection{Overview of Our Protocol}
-Elliptic curve cryptography is an outstanding approach to public-key cryptography in terms of strength. Traditionally, the cost of public key operations may dominate the cost of transmitting packets in sensor network. Since broadcast authentication requires sensors to conduct a large number of PKC operations, using PKC in the traditional way is still impractical. It is desirable if we can significantly reduce the cost of PKC operations by optimizing the broadcast authentication protocols.
-We propose ShortPK approach, i.e. short-length public key, for example, if we reduce an ECC public key from 160bits to 80 bits, the computation cost for signature is reduced to roughly one eighth and the length of signatures is reduced to half. While short-length public key is easy to break, we need a more efficient way to distribute short-length public keys. With enough memory, we can load public keys into sensor$'$s memories before sensor deployment. But the public keys must be encrypted, otherwise one sensor is compromised, the public keys will be compromised.  We can use AES for the symmetric-key encryption, therefore nobody, including sensor nodes, knows public keys before the arrival of decryption key included in broadcast packet. 
+Elliptic curve cryptography is an outstanding approach to public-key cryptography in terms of security strength. However, as practical as they may become, the cost of public key operations may dominate the cost of transmitting packets in sensor network. Since broadcast authentication requires sensors to conduct a large number of PKC operations, using PKC in the traditional way is still impractical. It is desirable if we can significantly reduce the cost of PKC operations by optimizing the broadcast authentication protocols.
 
-Meanwhile, we denote encryption key as \emph{K$_i$}, i means the \emph{i-th} dissemination. However, it is important that sensor nodes are able to verify \emph{K$_i$} in each of the broadcast packet. If the adversary randomly chooses a key \emph{K$_i '$} and a public key \emph{PK$_i '$} , encrypts \emph{PK$_i '$} into (\emph{PK$_i '$})\emph{K$_i '$} using \emph{K$_i '$}, both \emph{PK$_i '$} and \emph{K$_i '$} are invalid. When receiving packet, sensors do not verify \emph{K$_i$}, then will get a gibberish \emph{PK$_i '$}. They will use \emph{PK$_i '$} as the public key to conduct signature verification. Even though the verification is not successful, sensors spend a lot of energy and time verifying the signature.
+We propose ShortPK approach, i.e. short-length public key. For example, if we reduce an ECC public key from 160bits to 80 bits, the computation cost for signature is reduced to roughly one eighth and the length of signatures is reduced to half \cite{ShortPK}. While short-length public key is easy to break, we need a more safe way to distribute short-length public keys. 
 
-Therefore, sensors need to verify whether the received \emph{K$_i '$} is from the basestation or not. This can be achieved by one-way hash chain.
+With enough memory, we can load public keys into sensor$'$s memories before sensor deployment. But the public keys must be encrypted, otherwise one sensor is compromised, the public keys will be compromised and private keys will be derived from public key using ECC-oriented CPU.  We can use AES for the symmetric-key encryption, therefore nobody, including sensor nodes, knows public keys before the arrival of decryption key included in broadcast packet. 
+
+Meanwhile, we denote encryption key as \emph{K$_i$}, subscript \emph{i} means the \emph{i-th} dissemination. It is important that sensor nodes are able to verify legitimacy of \emph{K$_i$} in each broadcast packet, otherwise the broadcasting is not secure using the following attacks:
+
+If the adversary randomly chooses a key \emph{K$_i '$} and a public key \emph{PK$_i '$} , encrypts \emph{PK$_i '$} into (\emph{PK$_i '$})\emph{K$_i '$} using \emph{K$_i '$}. Both \emph{PK$_i '$} and \emph{K$_i '$} are invalid. While receiving packet, sensors do not verify \emph{K$_i$}, then will get a gibberish \emph{PK$_i '$}. They will use \emph{PK$_i '$} as the public key to conduct signature verification. Even though the verification is not successful, sensors spend a lot of energy and time verifying the signature.
+
+Therefore, sensors need to verify whether the received \emph{K$_i '$} is from the basestation. It can be achieved by one-way hash chain: 
 
 \begin{figure}
 \centering
@@ -296,78 +266,87 @@ As illustrated in Fig.4, the sender randomly chooses a number \emph{K$_b$}, and 
 
 % Hash Chain element  %
 
-But adversaries can intercept the communication channel between base station and sensor nodes. The encryption key broadcasted in open channel is exposed to adversaries. By compromising sensor nodes, the cipher text of \emph{PK$_i '$} is also obtained by adversary. Based on mentioned information, adversary is able to get public key by decrypting cipher text stored on sensor nodes using intercepted key. After getting Public key, adversary is able to forge a malicious packet containing \emph{data}$'$, that is (\emph{data}$'$), \emph{K$_i$}, \emph{signature}. \emph{signature} is produced using decrypted public key.
+But as illustrated in Fig.2, adversaries can intercept the communication channel between base station and sensor nodes. The encryption key broadcasted in open channel is exposed to adversaries. By compromising sensor nodes, the cipher text of \emph{PK$_i '$} is also obtained by adversary. Based on mentioned information, using intercepted key to decrypt cipher text stored on sensors, adversary is able to get public key.
+
+After getting public key and spending a large amount of time deriving private keys from public key, adversary is able to forge a malicious packet containing malicious information. That packet contains (\emph{data}$'$), \emph{signature}$'$. where \emph{signature}$'$ is produced by deduced private keys and \emph{data}$'$ means to destroy the WSNs.
 		
-		Obviously, it take adversary time to listen to communication in channel and forge a malicious packet. 
-		We must prolong the time for adversary to produce an invalid packet. Here we can use message specific puzzle, make the packet hard to produce. That is, without solving a message specific puzzle first, adversary cannot send a malicious packet.
+	Obviously, it take adversary time to listen to communication in channel and forge a malicious packet. 
+	We must prolong the time for adversary to produce an invalid packet. Here we can use message specific puzzle, make the packet hard to produce. That is, without solving a message specific puzzle first, adversary cannot send a malicious packet.
+	Specific puzzle is a relatively weak authentication method and easy to implement. It requires arithmetic results of packets to follow a certain rule, such as to equal to 0.
+	Following these design consideration, our protocol is made up of three phases: system initialization, packet pre-processing, and packet verification. The system initialization is carried out before network deployment. The framework and algorithm for security is established in this phase. Besides, private keys, public keys and encryption material of public keys should be loaded on sensors. Then before disseminating data, the basestation executes packet pre-processing phase in which disseminated packets and their specific puzzle are constructed. Finally, in the packet verification phase, a node verifies every received packet. If the result is positive, it updates the data item included in the received packet. In the following, each phase is described in detail. The notations used in the description are listed in Table I.  1
 
+
+\begin{table}[t]
+\begin{tabular}{l l}
+
+\hline
+Notation & Description  \\
+\hline
+\emph{SIG}$_k$(\emph{M}) &  the signature on message \emph{M} with key \emph{k}  \\
+\emph{E}$_k$(\emph{M}) & encryption message \emph{M} with a symmetric key \emph{k}\\
+
+$,$ or $||$ & concatenation operator of the two bit streams\\
+
+\emph{H}(.) & public one-way cryptographic hash function (e.g., SHA-1)\\
+
+\emph{H}(\emph{M}) & the hash value of message M\\
+\end{tabular}
+
+\caption{NOTATIONS}
+
+\end{table}
+
+ % \small
 \subsection{System Initialization Phase}
-In this stage, the sender sets up an ECC by deriving a private key SK and public parameters {PK,Q, p, q,H(.)} by performing the following operations. It selects an elliptic curve E over GF(p), where p is a big prime number. Here Q denotes the base point of E while q is also a big prime number and  represents the order of Q. It then picks the private key SK $\in$ GF(q) and generates the public key PK = SK$\cdot$Q. As an illustrative example, for 160-bit ECC, both PK and Q are 320 bits long, and both p and q are 160 bits long.
+In this stage, the sender sets up an ECC and generate a private key SK and public parameters {PK,Q, p, q,H(.)} by performing the following operations. It selects an elliptic curve E over GF(p), where p is a big prime number. Here Q denotes the base point of E while q is also a big prime number and  represents the order of Q. It then picks the private key SK $\in$ GF(q) and generates the public key PK = SK$\cdot$Q. As an illustrative example, for 160-bit ECC, both PK and Q are 320 bits long, and both p and q are 160 bits long.
 
-Using a node of one-way hash chain as security key, strong encryption is achieved through the use of a 128-bit AES algorithm. The cipher text is loaded on every sensor nodes, thus adversary is not able to squeeze any key information out of cipher text. On the basis of AES algorithm, we can use small-sized public key and small-sized signature to keep our protocol cost-effective. 
-
-The secret key is included in broadcast packet.     
+Using a node of one-way hash chain as security key, strong encryption is achieved through the use of a 128-bit AES algorithm. The cipher text is loaded on every sensor nodes, thus adversary is not able to squeeze any key information out from cipher text. On the basis of AES algorithm, we can use short-length public key and short-length signature to keep our protocol cost-effective.     
 
 If the public keys are not encrypted, adversaries can immediately get all the public keys, and will have much longer enough time to find the corresponding private keys.
 
-In this stage, sender transforms public keys into ciphertext, (\emph{PK$_i$})\emph{K$_i$}. The encryption keys, denoted as \emph{K$_1$},,,\emph{K$_N$}, are the elements of hash chain in Fig.1. \emph{K$_i$} is the \emph{i-th} key in the one-way key chain.  
+In this stage, sender transforms public keys into ciphertext, (\emph{PK$_i$})\emph{K$_i$}. The encryption keys, denoted as \emph{K$_1$} ... \emph{K$_N$}, are the elements of hash chain in Fig.1. \emph{K$_i$} is the \emph{i-th} key in the one-way key chain.  
 
-The committed value of this hash chain (i.e., \emph{K$_0$}) and ciphertext of public keys (\emph{PK$_i$})\emph{K$_i$} are preloaded in each receiver of the network before deployment, together with the public parameters {PK, Q, p, q,H(.)} of the sender. Any of the reported secure key pre-distribution schemes (e.g., [16], [17]) may be used for this purpose. The hash chain is called the version chain as its elements correspond to update versions of the message. The \emph{j-th} element of this hash chain stored in the sensor receiver is called \emph{j-th} version key.
+The committed value of this hash chain (i.e., \emph{K$_0$}) and ciphertext of public keys (\emph{PK$_i$})\emph{K$_i$} are preloaded on each receiver of the network before deployment, together with the public parameters {PK, Q, p, q,H(.)} of the sender. Any of the reported secure key pre-distribution schemes (e.g., \cite{key_management}) may be used for this purpose. The hash chain is called the version chain as its elements correspond to update versions of the message. The \emph{j-th} element of this hash chain stored in the sensor receiver is called \emph{j-th} version key.
 
 \subsection{Pakcet Pre-processing Phase}
-Our solution is keyed message-specific puzzles based on one-way key chains
-(or briefly, message-specific puzzles). Intuitively, to prevent an attacker from precomputing puzzle solutions to forged messages, we add in such a puzzle a previously undisclosed key in the one-way key chain. As a result, an attacker cannot precompute a puzzle solution until such a key is released by the sender. Upon receiving such a packet, any node can easily verify the puzzle solution. However, we develop the puzzle system in such a way that it will take a substantial amount of time to solve such a puzzle. As a result, even if the key \emph{K$_i$} is released in a broadcast packet, an attacker cannot immediately solve the puzzle for a forged packet, and thus cannot immediately launch Dos attacks.
+	After system initialization, if the sender wants to disseminate a message, say the 
+	\emph{i}-th message 
+	\emph{D$_i$} = \{{\emph{key, seqno, data}}\}, where \emph{i} > 0, as shown in Fig.5, it uses concatenation-hashing encryption and specific puzzle to construct the packet of the message as follows. 
 
-Now let us describe the details of message specific puzzles. As in the strawnman approach, we assume the sender has generated a one-way key chain consisting of  \emph{K$_0$} \emph{K$_1$} ... \emph{K$_n$}, and distributed \emph{K$_0$} to all potential receivers. 
+	Firstly, sender signs \emph{D$_i$} using digital signature algorithm, ECDSA, and obtains signature, \emph{SIG$_{SK}$$($D$_i$$)$}.
+	Secondly, signature, hash chain \emph{K$_i$}, data item \emph{D$_i$} will be concatenated together to construct a message specific puzzle. A weak authenticator called message specific puzzle is constructed by finding fixed-size segment(W) which satisfies the first \emph{l} bits of 
+\emph{H}(\emph{W}$\parallel$ $K_i$ $\parallel$ $D_i$ $\parallel$ \emph{SIG$_{SK}$$($D$_i$$)$})
+equls to 0.
 
-		Given the \emph{i-th} message M$_i$, the sender first generates the broadcast authenticator, i.e., signature$_i$, and K$_i$ then construct the puzzle, which we call the i-th message specific puzzle. For the sake of presentation, we denodte the solution to this puzzle as P$_i$. As shown int Figure.5.
-		
-	
-
-A valid solution P$_i$ to the i-th message-specific puzzle, where 1 $\leq$ i $\leq$n, must satisfy the following condition:
-After applying the hash function Fp to the i-th message-specific puzzle and its solution, we get an image where the first l bits are all ``0''. That is,
-F(i | Mi | signature | Ki | P) = 0000xxxxxx
-where ``xxx..'' represents any bit pattern. The parameter l is called the strength of the puzzle.
-Because of the one-way property of the hash function Fq, one has to search through the space of possible solutions to solve the puzzle. In other words, given Mi signature Ki for each candidate solution W, the sender (or an attacker) has to verify if the first l bits of Fp(Mi, signature, Ki p) are all ``0''.
-Finally, the sender then broadcasts the packet with the payload i | Mi | signature | Ki | P .
+Finally, the sender then broadcasts the packet with the payload (\emph{W}$\parallel$ $K_i$ $\parallel$ $D_i$ $\parallel$ \emph{SIG$_{SK}$$($D$_i$$)$}).
 		
 \begin{figure}
 \centering
-\includegraphics[width=8cm,height=2cm]{SpecificPuzzle.pdf}
+\includegraphics[width=8cm,height=2cm]{specific_puzzle.pdf}
 \caption{specific puzzle}
 \label{} 
 \end{figure}
 
-
-
 \subsection{packet verification phase}
-Upon receiving a broadcast packet, each receiver first verifies the puzzle solution, If the puzzle solution is invalid, the receiver will simply drop this packet. 
+Upon receiving a broadcast packet, each receiver first verifies the packet using specific puzzle. If the Hash result of the whole packet is invalid, the receiver will simply drop this packet. 
 
-Then receiver verifies the puzzle key K1 included in the packet, i.e., whether the hash result of K1 equals to K0 or not.
+Else, then receiver verifies the puzzle key \emph{K$_i$} included in the packet, i.e., whether the hash result of \emph{K$_i$} equals to \emph{K$_{i-1}$} or not. In practice, 
+\emph{K$_{i-1}$} is pre-loaded on sensors.
 
-If the puzzle key k1 is authentic, we can use it to decrypt the ciphertext stored in receiver nodes. 
+If the puzzle key \emph{K$_i$} is authentic, we can use it to decrypt the  public keys ciphertext stored in receiver nodes. 
 After that, signature included in packet will be verified by decrypted public keys. 
 
-Then, receiver accept the data included in packet.
+Then, receiver accept the data item included in packet.
 \section{Security And Efficiency Analysis}
 \subsection{Security Analysis}
 \textbf{Integrity of Data Items}
 In our protocol, the base station is trustworthy. It signs every message with the generated private key. Since private key is only known to base station,  receivers are able to authenticate the identity of message's sender.  On the basis of signature, receiver can verify the data upon receiving them.
 
 \textbf{Resistance to Dos Attacks}
-As discussed in related work, there are three types of Dos attacks against basic our protocol:
-\begin{enumerate}
-\item Dos attacks exploiting authenticatio delays.
-\item Dos attacks exploiting the expensive signature verifications, and 
-\item Dos attacks exploiting Trickle algorithm.
-\end{enumerate}
+Dos attacks was launched by exploiting authentication delays or exploiting expensive signature verification. 
 
-Ourprotocol is resistant to all three types Dos attacks. Due to the use of message specific puzzle, upon receiving a packet, each node can verify it immediately through performing efficient hash function. Further, because of short-length public key, the verification does not take long time.
+Due to the use of message specific puzzle, upon receiving a packet, each node can verify it immediately through performing efficient hash function. Further, because of short-length public key, the verification does not take a long time and energy.
 
- Without passage of key verification, anyone cannot misuse trickle algorithm.
- 
-   Adopting our protocol, WSNs is immune to all three types of Dos attacks. Indeed, without enough time and private key, attackers is not able to paralyze WSNs through  producing a valicious packet or falsifing valid message.
-   
 \textbf{Efficiency Analysis}   
     Only if the verification of the puzzle included in the signature packet is successful will each node execute the signature verification operation.
 	While being transmitted, short-length signature consumes  little bandwidth. It is fast hash  function that verifies a specific puzzle. Hash function is fast and efficient on sensor node.
@@ -378,24 +357,28 @@ Ourprotocol is resistant to all three types Dos attacks. Due to the use of messa
 We evaluate our protocol by implementing all its components in an experimental test-bed. Also, we choose Drip for performance comparison.
 
 \subsection{Implementation and Experimental Setup}
-Our implementation has the base station and sensor node side programs. The base station side programs are C programs using OpenSSL. All programs and application on base station side is running on virtual machine, VMware Workstation, which is a distinguished software. Besides, the sensor node side programs are written in nesC, a event-driven programming language. NesC is running on resource-limited  sensor motes, Telsob. The Telosb mote has an 8-MHz CPU, 10-kB RAM, 48-kB ROM, 1MB of flash memory, and an 802.15.4/Zigbee radio. Telosb, nesC, is specially designed for TinyOS, an open source operating system designed for wireless devices. 
-The key size of ECC is set to 128 bits and SHA-1 is used. Without additional specification,
+Our implementation has the base station and sensor node side programs. The base station side programs are C programs using OpenSSL. All programs and application on base station side is running on virtual machine, VMware Workstation, which is a distinguished software. Besides, the sensor node side programs are written in nesC, an event-driven programming language. NesC is running on resource-limited  sensor motes, Telsob. The Telosb mote has an 8-MHz CPU, 10-kB RAM, 48-kB ROM, 1MB of flash memory, and an 802.15.4/Zigbee radio. Telosb, nesC, is specially designed for TinyOS, an open source operating system designed for wireless devices. 
+The key size of ECC is set to 128 bits.
+Without additional specification,
 we repeated one million times (resp., one thousand times) for each measurement in order to obtain a objective accurate results.
 
 To implement our protocol, we add the following functionalities in the C tools on the base station side: construction of specific puzzles. 
 
 In the implementation of Drip, when a packet with a new version number is received, a node stores the packet and then resets the Trickle timer. In our protocol, when a packet with a new version number is received, a node stores the packet and then authenticates it. If the result is positive, the node resets Trickle timer; otherwise, the node simply discards the packet. In  an improved protocol, the packet additionally contains a specific puzzle, the result is different.
 
-Following the design of our protocol described above, we employ the ECDSA verify and SHA-1 hash operations of TinyECC 2.0 library to add the verification function of signature packet into the Drip nesC library. 
-In our implementation, the base station (i.e. a laptop PC) first sends the signature and data packets through a serial port to a particular sensor node which is referred to as disseminator. Then, the disseminator disseminates these packets by Drip.
+Following the design of our protocol described above, we employ the ECDSA and SHA-1 hash operations of TinyECC 2.0 library to add the verification function of signature packet into the Drip nesC library. 
+In our implementation, the base station (i.e. a laptop PC) first sends the signature and data packets through a serial port to a particular sensor node which is referred to as disseminator. Then, the disseminator disseminates these packets by Drip protocol.
 
-Similar to , we have built a circuit as shown in Fig.4 to measure the power consumption in resource-limited sensor nodes when they execute various cryptographic .
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8cm,height=5cm]{2.eps}
+\end{center}
+\caption{DataFigure}\label{fig:SSDArchitecture}
+\end{figure}
 
 
 \subsection{Evaluation Results}
-Our implementation is very good.
-
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=8cm,height=5cm]{compare_color.eps}
@@ -410,16 +393,9 @@ Our implementation is very good.
 \caption{DataFigure}\label{fig:SSDArchitecture}
 \end{figure}
 
+The charts in Fig.6 show the average times for each operation phase in TinyECC. This charts shows that ECC with secp128r1 has no obvious advantage over that with secp160r1 in speed. It has the similar time consumption with secp160r1. But shortness is a virtue we appreciate in packet broadcast, since packet transmission consumes major bandwidth and energy of sensor nodes. Besides, in initiation phase, secp128r1 is the fastest. It will help quick deployment of WSNs under some exceptional circumstances.
 
-The charts in Fig.7 show the average times for each operation phase in TinyECC. This charts shows that ECC with secp128r1 has no advantage over that with secp160r1. It has the similar time consumption with secp160r1. But shortness is a virtue we appreciate in packet broadcast, which consumes major bandwidth and power of sensor node. Besides, in initiation phase, secp128r1 is the fastest. It will help quick deployment of WSNs under some exceptional circumstances.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=8cm,height=5cm]{2.eps}
-\end{center}
-\caption{DataFigure}\label{fig:SSDArchitecture}
-\end{figure}
-
+The charts in Fig.5 show that the computing time grows exponentially. 
 
 \section{Conclusions}
 
@@ -454,24 +430,11 @@ In this paper, we have identified the security vulnerabilities in data discovery
 
 \bibitem{tinyos} http://www.tinyos.net/
 
-\bibitem{efficient} Perrig A, Canetti R, Tygar J D, et al.: Efficient authentication and signing of multicast streams over lossy channels[C]//Security and Privacy, 2000. IEEE Symposium on. IEEE, 2000: 56-73.%Here I delete S&P 2000
+\bibitem{trickle} Patel N, Culler D, Shenker S.: Trickle: A self regulating algorithm for code propagation and maintenance in wireless sensor networks[M]. Computer Science Division, University of California, 2003.
 
-\bibitem{trickle}Patel N, Culler D, Shenker S.: Trickle: A self regulating algorithm for code propagation and maintenance in wireless sensor networks[M]. Computer Science Division, University of California, 2003.
+\bibitem{ShortPK} Wang R, Du W, Liu X, et al. ShortPK: A short-term public key scheme for broadcast authentication in sensor networks[J]. Acm Transactions on Sensor Networks, 2009, 6(1):2939-2965.
 
-\bibitem{lnicstchap} May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline:
-Composing a Complex Biological Workflow through Web Services. In: Nagel,
-W.E., Walter, W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128,
-pp. 1148--1158. Springer, Heidelberg (2006)
-
-\bibitem{proceeding2} Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the
-Grid: an Open Grid Services Architecture for Distributed Systems
-Integration. Technical report, Global Grid Forum (2002)
-
-\bibitem{url} National Center for Biotechnology Information, http://www.ncbi.nlm.nih.gov
-
-\bibitem{Msp}He D, Chan S C, Tang S, et al. Secure Data Discovery and Dissemination based on Hash Tree for Wireless Sensor Networks[J]. IEEE Transactions on Wireless Communications, 2013, 12(9):4638-4646.
-
-\bibitem{asurvey} Grover K, Lim A.: A survey of broadcast authentication schemes for wireless networks[J]. Ad Hoc Networks, 2015, 24: 288-316.
+\bibitem{key_management} Gandino, F., B. Montrucchio, and M. Rebaudengo. "Key Management for Static Wireless Sensor Networks With Node Adding." IEEE Transactions on Industrial Informatics 10.2(2014):1133-1143.
 
 \end{thebibliography}
 \end{document}

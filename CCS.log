@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.31)  17 NOV 2016 20:36
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.31)  24 NOV 2016 18:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -223,7 +223,18 @@ File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 373.
 Package: cite 2010/09/10  v 5.3
-) (./CCS.aux
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+)) (./CCS.aux
 
 LaTeX Warning: Label `' multiply defined.
 
@@ -314,104 +325,146 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 102.
+LaTeX Font Info:    Try loading font information for U+msa on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 102.
+LaTeX Font Info:    Try loading font information for U+msb on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 102.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 102.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 102.
-
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 102.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 66.
 
-Overfull \hbox (1.28452pt too wide) in paragraph at lines 105--106
+Overfull \hbox (1.28452pt too wide) in paragraph at lines 69--70
 \T1/aer/m/n/9 mech-a-nism with tra-di-tional 160-bit ECC public-key schemes,
  []
 
 Excluding 'CCSXML' comment.
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 155.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 119.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/ae/omsaer.fd
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 119.
 
-<Attack_scenario.pdf, id=1, 317.68687pt x 268.75406pt>
-File: Attack_scenario.pdf Graphic file (type pdf)
+<Attack_Scenario2.pdf, id=1, 627.84563pt x 382.42876pt>
+File: Attack_Scenario2.pdf Graphic file (type pdf)
 
-<use Attack_scenario.pdf>
-Package pdftex.def Info: Attack_scenario.pdf used on input line 174.
-(pdftex.def)             Requested size: 142.26941pt x 113.81093pt.
+<use Attack_Scenario2.pdf>
+Package pdftex.def Info: Attack_Scenario2.pdf used on input line 138.
+(pdftex.def)             Requested size: 227.61455pt x 142.26085pt.
 
-Overfull \hbox (2.18394pt too wide) in paragraph at lines 181--183
+Overfull \hbox (2.18394pt too wide) in paragraph at lines 145--147
 \T1/aer/m/n/9 nesses and ef-fi-ciency prob-lem, we re-view ex-ist-ing broad-
  []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
- <./Attack_scenario.pdf>]
-[2] <NetworkModel.pdf, id=45, 436.63126pt x 339.51843pt>
-File: NetworkModel.pdf Graphic file (type pdf)
+ <./Attack_Scenario2.pdf>] [2] <antenna.pdf, id=72, 283.0575pt x 201.75375pt>
+File: antenna.pdf Graphic file (type pdf)
+ <use antenna.pdf>
+Package pdftex.def Info: antenna.pdf used on input line 197.
+(pdftex.def)             Requested size: 170.7212pt x 113.81252pt.
 
-<use NetworkModel.pdf>
-Package pdftex.def Info: NetworkModel.pdf used on input line 238.
-(pdftex.def)             Requested size: 170.7119pt x 113.80801pt.
- <DataFlow.pdf, id=46, 505.13719pt x 243.15843pt>
+Overfull \hbox (7.71169pt too wide) in paragraph at lines 214--215
+[]\T1/aer/m/n/9 Low com-pu-ta-tion cost: Broad-cast au-then-ti-ca-tion scheme
+ []
+
+<DataFlow.pdf, id=73, 505.13719pt x 243.15843pt>
 File: DataFlow.pdf Graphic file (type pdf)
-
-<use DataFlow.pdf>
-Package pdftex.def Info: DataFlow.pdf used on input line 272.
+ <use DataFlow.pdf>
+Package pdftex.def Info: DataFlow.pdf used on input line 231.
 (pdftex.def)             Requested size: 227.62566pt x 113.80956pt.
- [3 <./NetworkModel.pdf> <./DataFlow.pdf
+
+Overfull \hbox (1.59348pt too wide) in paragraph at lines 251--252
+[]\T1/aer/m/n/9 With enough mem-ory, we can load pub-lic keys into sensor$[]$s
+ []
+
+[3 <./antenna.pdf> <./DataFlow.pdf
 
 pdfTeX warning: pdflatex (file ./DataFlow.pdf): PDF inclusion: multiple pdfs wi
 th page group included in a single page
->] <HashChain.pdf, id=132, 686.565pt x 149.05687pt>
+>] <HashChain.pdf, id=127, 686.565pt x 149.05687pt>
 File: HashChain.pdf Graphic file (type pdf)
  <use HashChain.pdf>
-Package pdftex.def Info: HashChain.pdf used on input line 295.
+Package pdftex.def Info: HashChain.pdf used on input line 261.
 (pdftex.def)             Requested size: 284.52107pt x 56.90602pt.
 
-Overfull \hbox (44.52107pt too wide) in paragraph at lines 295--295
+Overfull \hbox (44.52107pt too wide) in paragraph at lines 261--261
  [][] 
  []
 
 
-Underfull \vbox (badness 1558) has occurred while \output is active []
+Overfull \hbox (9.19598pt too wide) in paragraph at lines 269--270
+\T1/aer/m/n/9 com-mu-ni-ca-tion chan-nel be-tween base sta-tion and sen-sor nod
+es.
+ []
 
- [4 <./HashChain.pdf>] <SpecificPuzzle.pdf, id=151, 876.27374pt x 258.9675pt>
-File: SpecificPuzzle.pdf Graphic file (type pdf)
 
-<use SpecificPuzzle.pdf>
-Package pdftex.def Info: SpecificPuzzle.pdf used on input line 340.
-(pdftex.def)             Requested size: 227.61186pt x 56.90584pt.
+Overfull \hbox (53.0612pt too wide) in paragraph at lines 280--294
+[][] 
+ []
 
-Overfull \hbox (18.65689pt too wide) in paragraph at lines 381--381
+[4 <./HashChain.pdf>]
+Overfull \hbox (3.68756pt too wide) in paragraph at lines 312--315
+\T1/aer/m/n/9 hashing en-cryp-tion and spe-cific puz-zle to con-struct the pack
+et
+ []
+
+<specific_puzzle.pdf, id=146, 345.54094pt x 118.19156pt>
+File: specific_puzzle.pdf Graphic file (type pdf)
+
+<use specific_puzzle.pdf>
+Package pdftex.def Info: specific_puzzle.pdf used on input line 325.
+(pdftex.def)             Requested size: 227.62537pt x 56.90623pt.
+
+Overfull \hbox (18.65689pt too wide) in paragraph at lines 356--356
 []\secfnt IMPLEMENTATION AND PER-FOR-MANCE
  []
 
+
+Overfull \hbox (1.33908pt too wide) in paragraph at lines 369--371
+\T1/aer/m/n/9 2.0 li-brary to add the ver-i-fi-ca-tion func-tion of sig-na-ture
+ packet
+ []
+
+Package epstopdf Info: Source file: <2.eps>
+(epstopdf)                    date: 2016-11-12 12:38:48
+(epstopdf)                    size: 19425 bytes
+(epstopdf)             Output file: <2-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-11-12 12:50:46
+(epstopdf)                    size: 7121 bytes
+(epstopdf)             Command: <repstopdf --outfile=2-eps-converted-to.pdf 2.e
+ps>
+(epstopdf)             \includegraphics on input line 375.
+Package epstopdf Info: Output file is already uptodate.
+<2-eps-converted-to.pdf, id=147, 361.35pt x 252.945pt>
+File: 2-eps-converted-to.pdf Graphic file (type pdf)
+
+<use 2-eps-converted-to.pdf>
+Package pdftex.def Info: 2-eps-converted-to.pdf used on input line 375.
+(pdftex.def)             Requested size: 227.62413pt x 142.26576pt.
 Package epstopdf Info: Source file: <compare_color.eps>
 (epstopdf)                    date: 2016-11-07 22:11:09
 (epstopdf)                    size: 19218 bytes
@@ -420,14 +473,15 @@ Package epstopdf Info: Source file: <compare_color.eps>
 (epstopdf)                    size: 5836 bytes
 (epstopdf)             Command: <repstopdf --outfile=compare_color-eps-converte
 d-to.pdf compare_color.eps>
-(epstopdf)             \includegraphics on input line 405.
+(epstopdf)             \includegraphics on input line 384.
 Package epstopdf Info: Output file is already uptodate.
-<compare_color-eps-converted-to.pdf, id=152, 361.35pt x 252.945pt>
+
+<compare_color-eps-converted-to.pdf, id=148, 361.35pt x 252.945pt>
 File: compare_color-eps-converted-to.pdf Graphic file (type pdf)
 
 <use compare_color-eps-converted-to.pdf>
 Package pdftex.def Info: compare_color-eps-converted-to.pdf used on input line 
-405.
+384.
 (pdftex.def)             Requested size: 227.62413pt x 142.26576pt.
 Package epstopdf Info: Source file: <converge.eps>
 (epstopdf)                    date: 2016-11-14 18:34:58
@@ -437,50 +491,31 @@ Package epstopdf Info: Source file: <converge.eps>
 (epstopdf)                    size: 5920 bytes
 (epstopdf)             Command: <repstopdf --outfile=converge-eps-converted-to.
 pdf converge.eps>
-(epstopdf)             \includegraphics on input line 412.
+(epstopdf)             \includegraphics on input line 391.
 Package epstopdf Info: Output file is already uptodate.
 
-<converge-eps-converted-to.pdf, id=153, 361.35pt x 252.945pt>
+<converge-eps-converted-to.pdf, id=149, 361.35pt x 252.945pt>
 File: converge-eps-converted-to.pdf Graphic file (type pdf)
 
 <use converge-eps-converted-to.pdf>
-Package pdftex.def Info: converge-eps-converted-to.pdf used on input line 412.
+Package pdftex.def Info: converge-eps-converted-to.pdf used on input line 391.
 (pdftex.def)             Requested size: 227.62413pt x 142.26576pt.
-Package epstopdf Info: Source file: <2.eps>
-(epstopdf)                    date: 2016-11-12 12:38:48
-(epstopdf)                    size: 19425 bytes
-(epstopdf)             Output file: <2-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-12 12:50:46
-(epstopdf)                    size: 7121 bytes
-(epstopdf)             Command: <repstopdf --outfile=2-eps-converted-to.pdf 2.e
-ps>
-(epstopdf)             \includegraphics on input line 422.
-Package epstopdf Info: Output file is already uptodate.
-
-<2-eps-converted-to.pdf, id=154, 361.35pt x 252.945pt>
-File: 2-eps-converted-to.pdf Graphic file (type pdf)
-
-<use 2-eps-converted-to.pdf>
-Package pdftex.def Info: 2-eps-converted-to.pdf used on input line 422.
-(pdftex.def)             Requested size: 227.62413pt x 142.26576pt.
- [5 <./SpecificPuzzle.pdf>]
+ [5 <./specific_puzzle.pdf>]
 No file CCS.bbl.
-[6 <./compare_color-eps-converted-to.pdf> <./converge-eps-converted-to.pdf> <./
-2-eps-converted-to.pdf>] [7
-
-] (./CCS.aux)
+[6 <./2-eps-converted-to.pdf> <./compare_color-eps-converted-to.pdf> <./converg
+e-eps-converted-to.pdf>] (./CCS.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3348 strings out of 493304
- 42988 string characters out of 6139871
- 117632 words of memory out of 5000000
- 6696 multiletter control sequences out of 15000+600000
+ 3598 strings out of 493304
+ 47019 string characters out of 6139871
+ 121931 words of memory out of 5000000
+ 6938 multiletter control sequences out of 15000+600000
  54972 words of font info for 77 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 41i,10n,35p,1032b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,11n,35p,1032b,476s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/f
@@ -495,10 +530,10 @@ texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
 s/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on CCS.pdf (7 pages, 861677 bytes).
+Output written on CCS.pdf (6 pages, 903698 bytes).
 PDF statistics:
- 245 PDF objects out of 1000 (max. 8388607)
- 182 compressed objects within 2 object streams
+ 233 PDF objects out of 1000 (max. 8388607)
+ 131 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

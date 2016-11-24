@@ -1,0 +1,9 @@
+#!/bin/bash
+RESULT=./result
+if [ ! -e $RESULT  ]
+    then
+    for(( idx =1; idx <32 ; idx ++ ))
+        do
+            ./count 1000 4 4 $idx
+        done
+fi
